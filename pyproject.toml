@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "capstone4"
+version = "0.1.0"
+description = "As we wrap up our time in Python, we'll finish up with one project to show off our newfound mastery (heh) of the language and all the stuff we've covered. This is to be a several-week capstone project, done in teams, where you take an existing website or service and create a reasonable (back-end heavy) clone of it."
+authors = ["Amanda Simmons <carpe737diem@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Django = "^3.1.7"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
