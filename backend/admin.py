@@ -1,3 +1,6 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from .models import MyCustomUser, FileUpload
 
-# Register your models here.
+admin.site.register(MyCustomUser, UserAdmin)
+admin.site.register(FileUpload)
