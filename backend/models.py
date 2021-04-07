@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 class MyCustomUser(AbstractUser):
     email = models.EmailField()
     password = models.CharField(max_length=20)
-
+    favorites = models.BooleanField()
     def __str__(self):
         return self.username
 
