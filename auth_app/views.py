@@ -36,6 +36,16 @@ class LogoutView(View):
 class UploadView(View):
     def get(self, request):
         form = FileUploadForm()
-        return render(request, "login.html", {"form" : form })
+        return render(request, "upload.html", {"form" : form })
+
+    def post(self, request):
+        if request.method =='POST':
+            file_uploaded = request.FILES['upload']
+            print(file_uploaded.name)
+
+            
+        return render(request, "upload.html")
+
+
 
   
