@@ -71,3 +71,9 @@ class SignupFormView(View):
             new_user.set_password(new_user.password)
             new_user.save()
             return HttpResponseRedirect(request.GET.get('next', reverse('Login')))
+
+def FavoritesView(request):
+    # fav_files = FileUpload.objects.get(id=favorite_id)
+    # request.user.author.favorites.add(fav_files)
+    return render(request, 'favorites.html')
+    # return HttpResponseRedirect(reverse('recipe_detail', args=[favorite_id]))
