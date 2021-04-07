@@ -8,7 +8,7 @@ class CustomUserForm(forms.ModelForm):
         model = MyCustomUser
         fields = ('email', 'username', 'password')
 
-class LoginForm(forms.ModelForm):
+class LoginForm(forms.Form):
     email = forms.CharField(widget=forms.EmailInput)
     password = forms.CharField(widget=forms.PasswordInput)
 
