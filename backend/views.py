@@ -1,4 +1,3 @@
-# from django.shortcuts import render
 # from django.http import HttpResponseServerError
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.views.generic import View
@@ -24,11 +23,6 @@ class UploadView(View):
             fs = FileSystemStorage()
             name = fs.save(file_uploaded.name, file_uploaded)
             context['url'] = fs.url(name)
-         
-            
-        return render(request, "upload.html", context)
+            return render(request, "upload.html", context)
 
-
-
-  
-        return HttpResponseRedirect(reverse('Login'))
+        return HttpResponseRedirect(reverse('Upload'))
