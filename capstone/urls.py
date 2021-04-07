@@ -22,3 +22,6 @@ urlpatterns = [
     path("login/", LoginFormView.as_view(), name="Login"),
     path("logout/", LogoutView.as_view()),
 ]
+
+
+
