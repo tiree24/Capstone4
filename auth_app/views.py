@@ -1,9 +1,9 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
-from backend.forms import LoginForm, FileUploadForm, CustomUserForm
-from backend.models import FileUpload
-from django.core.files.storage import FileSystemStorage
+from .forms import LoginForm, CustomUserForm
+# from backend.models import FileUpload
+# from django.core.files.storage import FileSystemStorage
 
 # from django.views.generic.edit import CreateView
 # from django.urls import reverse_lazy
@@ -33,27 +33,27 @@ class LogoutView(View):
 
 
 
-class UploadView(View):
-    def get(self, request):
-        form = FileUploadForm()
-        return render(request, "upload.html", {"form" : form })
+# class UploadView(View):
+#     def get(self, request):
+#         form = FileUploadForm()
+#         return render(request, "upload.html", {"form" : form })
 
-    def post(self, request):
-        context = {}
-        if request.method =='POST':
-            file_uploaded = request.FILES['upload']
-            print(file_uploaded.name)
-            fs = FileSystemStorage()
-            name = fs.save(file_uploaded.name, file_uploaded)
-            context['url'] = fs.url(name)
+#     def post(self, request):
+#         context = {}
+#         if request.method =='POST':
+#             file_uploaded = request.FILES['upload']
+#             print(file_uploaded.name)
+#             fs = FileSystemStorage()
+#             name = fs.save(file_uploaded.name, file_uploaded)
+#             context['url'] = fs.url(name)
          
             
-        return render(request, "upload.html", context)
+#         return render(request, "upload.html", context)
 
 
 
   
-        return HttpResponseRedirect(reverse('Login'))
+#         return HttpResponseRedirect(reverse('Login'))
 
 class SignupFormView(View):
 
