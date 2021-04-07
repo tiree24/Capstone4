@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
 from backend.forms import LoginForm, FileUploadForm
 from backend.models import FileUpload
+from django.core.files.storage import FileSystemStorage
 
 # from django.views.generic.edit import CreateView
 # from django.urls import reverse_lazy
@@ -39,12 +40,16 @@ class UploadView(View):
         return render(request, "upload.html", {"form" : form })
 
     def post(self, request):
+        context = {}
         if request.method =='POST':
             file_uploaded = request.FILES['upload']
             print(file_uploaded.name)
-
+            fs = FileSystemStorage()
+            name = fs.save(file_uploaded.name, file_uploaded)
+            context['url'] = fs.url(name)
+         
             
-        return render(request, "upload.html")
+        return render(request, "upload.html", context)
 
 
 

@@ -27,6 +27,7 @@ argon2 = ["argon2-cffi (>=16.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+<<<<<<< HEAD
 name = "dotenv"
 version = "0.0.5"
 description = "Handle .env files"
@@ -35,6 +36,8 @@ optional = false
 python-versions = "*"
 
 [[package]]
+=======
+>>>>>>> 61854645337ad68465d3e1ee6d5788edfe8fc09b
 name = "python-dotenv"
 version = "0.17.0"
 description = "Read key-value pairs from a .env file and set them as environment variables"
@@ -64,7 +67,11 @@ python-versions = ">=3.5"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
+<<<<<<< HEAD
 content-hash = "6c6f81ff488590ba9107cbb7c85b9e5861cab820c024cdc14d1875e6406fe63d"
+=======
+content-hash = "1139e4299e9ed5c2c8d7cb5525da7270702207241df6f3c846a6a1f4b9eae467"
+>>>>>>> 61854645337ad68465d3e1ee6d5788edfe8fc09b
 
 [metadata.files]
 asgiref = [
@@ -75,9 +82,12 @@ django = [
     {file = "Django-3.1.7-py3-none-any.whl", hash = "sha256:baf099db36ad31f970775d0be5587cc58a6256a6771a44eb795b554d45f211b8"},
     {file = "Django-3.1.7.tar.gz", hash = "sha256:32ce792ee9b6a0cbbec340123e229ac9f765dff8c2a4ae9247a14b2ba3a365a7"},
 ]
+<<<<<<< HEAD
 dotenv = [
     {file = "dotenv-0.0.5.tar.gz", hash = "sha256:b58d2ab3f83dbd4f8a362b21158a606bee87317a9444485566b3c8f0af847091"},
 ]
+=======
+>>>>>>> 61854645337ad68465d3e1ee6d5788edfe8fc09b
 python-dotenv = [
     {file = "python-dotenv-0.17.0.tar.gz", hash = "sha256:471b782da0af10da1a80341e8438fca5fadeba2881c54360d5fd8d03d03a4f4a"},
     {file = "python_dotenv-0.17.0-py2.py3-none-any.whl", hash = "sha256:49782a97c9d641e8a09ae1d9af0856cc587c8d2474919342d5104d85be9890b2"},
