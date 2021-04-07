@@ -16,14 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf import settings
-from auth_app.views import LoginFormView, LogoutView, UploadView
 from django.conf.urls.static import static
+from auth_app.views import LoginFormView, LogoutView, SignupFormView, UploadView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("login/", LoginFormView.as_view(), name="Login"),
     path("logout/", LogoutView.as_view(), name="Logout"),
     path("upload/", UploadView.as_view(), name="upload"),
+    path("logout/", LogoutView.as_view()),
+    path("signup/", SignupFormView.as_view(), name="Signup")
 ]
 
 if settings.DEBUG:

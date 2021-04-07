@@ -1,19 +1,16 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
-from backend.forms import LoginForm, FileUploadForm
+from backend.forms import LoginForm, FileUploadForm, CustomUserForm
 from backend.models import FileUpload
 from django.core.files.storage import FileSystemStorage
-
-# from django.views.generic.edit import CreateView
-# from django.urls import reverse_lazy
 
 
 class LoginFormView(View):
 
     def get(self, request):
         form = LoginForm()
-        return render(request, "login.html", { 'form': form})
+        return render(request, "generic_form.html", { 'form': form, 'heading': 'Login below'})
 
     def post(self, request):
         form = LoginForm(request.POST)
@@ -25,6 +22,11 @@ class LoginFormView(View):
                 login(request, user)
                 return HttpResponseRedirect(request.GET.get('next', reverse('Login')))
 
+        
+        form = LoginForm()
+        return render(request, 'generic_form.html', {
+            'heading': 'Login below',
+            'form': form})
 
 class LogoutView(View):
 
@@ -54,3 +56,18 @@ class UploadView(View):
 
 
   
+        return HttpResponseRedirect(reverse('Login'))
+
+class SignupFormView(View):
+
+    def get(self, request):
+        form = CustomUserForm()
+        return render(request, 'generic_form.html', {'form': form, 'heading': "Sign Up below"})
+
+    def post(self, request):
+        form = CustomUserForm(request.POST)
+        if form.is_valid():
+            new_user = form.save()
+            new_user.set_password(new_user.password)
+            new_user.save()
+            return HttpResponseRedirect(request.GET.get('next', reverse('Login')))
