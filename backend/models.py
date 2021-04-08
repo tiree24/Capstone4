@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils.timezone import now
 
-
 class FileUpload(models.Model):
     upload = models.FileField()
     date_time = models.DateTimeField(default=now)
