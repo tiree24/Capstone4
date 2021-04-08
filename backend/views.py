@@ -1,4 +1,4 @@
-# from django.http import HttpResponseServerError
+from django.http import HttpResponseServerError
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.views.generic import View
 from .forms import FileUploadForm
@@ -6,9 +6,9 @@ from .models import FileUpload
 from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
-# def my_test_500_view(request):
-#         # Return an "Internal Server Error" 500 response code.
-#         return HttpResponseServerError()
+def my_test_500_view(request):
+        # Return an "Internal Server Error" 500 response code.
+        return HttpResponseServerError()
 
 class UploadView(View):
     def get(self, request):
@@ -23,6 +23,7 @@ class UploadView(View):
             fs = FileSystemStorage()
             name = fs.save(file_uploaded.name, file_uploaded)
             context['url'] = fs.url(name)
+            context['form'] = FileUploadForm()
             return render(request, "upload.html", context)
 
         return HttpResponseRedirect(reverse('Upload'))

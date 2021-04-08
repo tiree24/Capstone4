@@ -18,9 +18,12 @@ class LoginFormView(View):
             data = form.cleaned_data
             user = authenticate(
                 request, email=data['email'], password=data['password'])
+            print(user)
             if user:
                 login(request, user)
                 return HttpResponseRedirect(request.GET.get('next', reverse('Upload')))
+            # else:
+            #     return HttpResponseRedirect(reverse('Login'))
 
 
 class LogoutView(View):
