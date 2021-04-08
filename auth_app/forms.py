@@ -14,4 +14,11 @@ class LoginForm(forms.Form):
 
     class Meta:
         model = MyCustomUser
-        fields = ('email', 'password')
+        fields = ('email', 'password', 'favorite')
+        choices = (
+        (False, 'Normal'),
+        (True, 'Favorite')    
+)
+        favorite = forms.ChoiceField(choices=choices)
+
+        
