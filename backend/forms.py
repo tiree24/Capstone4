@@ -5,4 +5,4 @@ class FileUploadForm(forms.ModelForm):
     upload = forms.CharField(widget=forms.FileInput)
     class Meta:
         model = FileUpload
-        fields = ('upload', 'date_time', 'search_str')
+        fields = ('title', 'upload', 'date_time', 'search_str',)
