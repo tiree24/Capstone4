@@ -1,9 +1,9 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
-from backend.forms import LoginForm, FileUploadForm, CustomUserForm
-from backend.models import FileUpload
+from backend.forms import FileUploadForm
 from django.core.files.storage import FileSystemStorage
+from .forms import LoginForm, CustomUserForm
 
 
 class LoginFormView(View):
@@ -17,46 +17,21 @@ class LoginFormView(View):
         if form.is_valid():
             data = form.cleaned_data
             user = authenticate(
-                request, username=data['username'], password=data['password'])
+                request, email=data['email'], password=data['password'])
+            print(user)
             if user:
                 login(request, user)
-                return HttpResponseRedirect(request.GET.get('next', reverse('Login')))
+                return HttpResponseRedirect(request.GET.get('next', reverse('Upload')))
+            # else:
+            #     return HttpResponseRedirect(reverse('Login'))
 
-        
-        form = LoginForm()
-        return render(request, 'generic_form.html', {
-            'heading': 'Login below',
-            'form': form})
 
 class LogoutView(View):
 
     def get(self, request):
         logout(request)
-        return HttpResponseRedirect(reverse('Home'))
-
-
-
-class UploadView(View):
-    def get(self, request):
-        form = FileUploadForm()
-        return render(request, "upload.html", {"form" : form })
-
-    def post(self, request):
-        context = {}
-        if request.method =='POST':
-            file_uploaded = request.FILES['upload']
-            print(file_uploaded.name)
-            fs = FileSystemStorage()
-            name = fs.save(file_uploaded.name, file_uploaded)
-            context['url'] = fs.url(name)
-         
-            
-        return render(request, "upload.html", context)
-
-
-
-  
         return HttpResponseRedirect(reverse('Login'))
+
 
 class SignupFormView(View):
 

@@ -1,28 +1,5 @@
-from backend.models import MyCustomUser, FileUpload
+from .models import FileUpload
 from django import forms
-
-class CustomUserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
-
-    class Meta:
-        model = MyCustomUser
-        fields = ('email', 'username', 'password')
-
-class LoginForm(forms.ModelForm):
-    email = forms.CharField(widget=forms.EmailInput)
-    password = forms.CharField(widget=forms.PasswordInput)
-
-    class Meta:
-        model = MyCustomUser
-        fields = ('email', 'password', 'favorite')
-        choices = (
-        (False, 'Normal'),
-        (True, 'Favorite')
-        
-)
-        favorite = forms.ChoiceField(choices=choices)
-    
-
 
 class FileUploadForm(forms.ModelForm):
     upload = forms.CharField(widget=forms.FileInput)
