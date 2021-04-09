@@ -14,7 +14,7 @@ class LoginForm(forms.Form):
 
     class Meta:
         model = MyCustomUser
-        fields = ('email', 'password', 'favorite')  
+        fields = ('email', 'password')  
 
 
         
