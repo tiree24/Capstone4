@@ -16,16 +16,13 @@ class LoginFormView(View):
     def post(self, request):
         form = LoginForm(request.POST)
         if form.is_valid():
-            data = form.cleaned_data
-            user = authenticate(
-                request, email=data['email'], password=data['password'])
-            print(user)
-            if user:
-                login(request, user)
-                return HttpResponseRedirect(request.GET.get('next', reverse('Upload')))
-            else:
-                return HttpResponseRedirect(reverse('Login'))
-
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password')
+            user = authenticate(email=email, password=password)
+            login(request, user)
+            return redirect('Upload')
+        else:
+            return HttpResponseRedirect(reverse('Login'))
 
 class LogoutView(View):
 
@@ -45,8 +42,9 @@ class SignupFormView(View):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
             password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
+            user = authenticate(email=email, password=password)
             login(request, user)
             return redirect('Upload')
         else:
