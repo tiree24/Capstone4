@@ -8,10 +8,14 @@
 <ul>
 
    <li>
-   <img style="width: 245px; height: 247px;"
+<p><img style="width: 245px; height: 247px;"
 alt="Image description"
- src="{{file.url}}"/>
+ src="{{file.upload.url}}"/></p>
+<p>Title:{{file.title}}</p>
+<p>Date: {{file.date_time}}</p>
+<p>File Size:{{file.upload.size}}</p>
  </li>
+ 
      </ul>
 
      {% endfor%}
