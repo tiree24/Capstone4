@@ -1,6 +1,6 @@
 from django.http import HttpResponseServerError
 from django.shortcuts import render, HttpResponseRedirect, reverse, redirect
-from django.views.generic import View
+from django.views.generic import View 
 from .forms import FileUploadForm
 from .models import FileUpload
 from django.core.files.storage import FileSystemStorage
@@ -10,12 +10,12 @@ import os
 
 
 
-
 def my_test_500_view(request):
         # Return an "Internal Server Error" 500 response code.
         return HttpResponseServerError()
 
 class UploadView(View):
+   
     def get(self, request):
         form = FileUploadForm()
         return render(request, "upload.html", {"form" : form })
@@ -33,35 +33,32 @@ class UploadView(View):
 
         return HttpResponseRedirect(reverse('Upload'))
 
-def file_list(request, **kwargs):
+class File_list(View):
+    def list(self, request):
+        files = FileUpload.objects.all()
+        return render(request, 'file_list.html', {"files": files})
     # media_url = settings.MEDIA_URL
     # path_to_user_folder = media_url + "/upload/"
     # context = {
     #     'files': FileUpload.objects.all(),
     #     'media_url': settings.MEDIA_URL,
     # }      
-    # media_path = settings.MEDIA_ROOT
     # myfiles = [f for f in listdir(media_path) if isfile(join(media_path, f))]
+    
+    # media_path = settings.MEDIA_ROOT
     # files = os.listdir(media_path)
     # print(files)
-    # for file in files:
-    #     if file:
-    #         file.join(media_path)
-    #     print(file)
-    media_path = settings.MEDIA_ROOT
-    files = os.listdir(media_path)
     # string = ''.join(f for f in files)
-    # print(string)
-    # my_files = [f.files for f in FileUpload.objects.all().order_by('-date_time')]
-
-    
-    return render(request, 'file_list.html', {"files": files})
+    # my_files = FileUpload()
+   
 
 def upload_file(request):
     if request.method == "POST":
         form = FileUploadForm(request.POST, request.FILES)
         if form.is_valid():
-            title = FileUpload.objects.create(title=form.cleaned_data['title'])
+            title = FileUpload.objects.create(title=form.cleaned_data['title'],
+                date_time=form.data['date_time'],
+                search_str=form.data['search_str'])
             new_file = FileUpload(file = request.FILES['file'])
             form.save()
             return redirect('files_list')

@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from auth_app.views import LoginFormView, LogoutView, SignupFormView
-from backend.views import UploadView, file_list, upload_file
+from backend.views import UploadView, File_list, upload_file
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -26,7 +26,7 @@ urlpatterns = [
     path("logout/", LogoutView.as_view(), name="Logout"),
     path("signup/", SignupFormView.as_view(), name="Signup"),
     path("upload/", UploadView.as_view(), name="Upload"),
-    path("files/", file_list, name="file_list"),
+    path("files/", File_list.as_view(), name="file_list"),
 ]
 
 if settings.DEBUG:

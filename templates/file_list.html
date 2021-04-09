@@ -7,8 +7,11 @@
  {% for file in files %}
 <ul>
 
-   <li> {{file}}</li>
-    
+   <li>
+   <img style="width: 245px; height: 247px;"
+alt="Image description"
+ src="{{file.url}}"/>
+ </li>
      </ul>
 
      {% endfor%}
