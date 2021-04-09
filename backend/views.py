@@ -22,11 +22,13 @@ class UploadView(View):
 
     def post(self, request):
         context = {}
+        files = []
         if request.method =='POST':
             file_uploaded = request.FILES['upload']
             print(file_uploaded.name)
             fs = FileSystemStorage()
             name = fs.save(file_uploaded.name, file_uploaded)
+            context['urls']= files.append(fs.url(name))
             context['url'] = fs.url(name)
             context['form'] = FileUploadForm()
             return render(request, "upload.html", context)
@@ -57,14 +59,14 @@ def file_list(request, **kwargs):
     
     return render(request, 'file_list.html', {"files": files})
 
-def upload_file(request):
-    if request.method == "POST":
-        form = FileUploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            title = FileUpload.objects.create(title=form.cleaned_data['title'])
-            new_file = FileUpload(file = request.FILES['file'])
-            form.save()
-            return redirect('files_list')
-    else:
-        form = FileUploadForm()
-    return render(request, 'upload.html', {"form": form})
+# def upload_file(request):
+#     if request.method == "POST":
+#         form = FileUploadForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             title = FileUpload.objects.create(title=form.cleaned_data['title'])
+#             new_file = FileUpload(file = request.FILES['file'])
+#             form.save()
+#             return redirect('files_list')
+#     else:
+#         form = FileUploadForm()
+#     return render(request, 'upload.html', {"form": form})

@@ -13,5 +13,11 @@
     <p>Uploaded file: <a href="{{ url }}">{{url}}</a><p/>
     {% endif %}
     {% endblock %} 
+
+{% if urls %}
+    {% for url in urls %}
+        <p><a href="{{ url }}">{{url}}</a><p/>
+        {% endfor %}
+        {% endif %}
     
 
