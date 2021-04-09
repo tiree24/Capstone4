@@ -18,7 +18,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from auth_app.views import LoginFormView, LogoutView, SignupFormView, FavoritesView
-from backend.views import UploadView, favorite
+from backend.views import UploadView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,3 +33,6 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = 'backend.views.handler404'
+handler500 = 'backend.views.handler500'
