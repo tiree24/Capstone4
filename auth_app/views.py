@@ -16,11 +16,17 @@ class LoginFormView(View):
     def post(self, request):
         form = LoginForm(request.POST)
         if form.is_valid():
-            email = form.cleaned_data.get('email')
-            password = form.cleaned_data.get('password')
-            user = authenticate(email=email, password=password)
-            login(request, user)
-            return redirect('Upload')
+            data = form.cleaned_data
+            email = data['email']
+            password = data['password']
+            user = authenticate(request, email=email, password=password)
+            
+            if user is not None:
+                login(request, user)
+                return redirect('Upload')
+            else:
+                return HttpResponseRedirect(reverse('Login'))
+
         else:
             return HttpResponseRedirect(reverse('Login'))
 
