@@ -4,6 +4,11 @@ from django.views.generic import View
 from .forms import FileUploadForm
 from .models import FileUpload
 from django.core.files.storage import FileSystemStorage
+from capstone.settings import MEDIA_ROOT
+from capstone import settings
+import os
+
+
 
 
 def my_test_500_view(request):
@@ -28,17 +33,37 @@ class UploadView(View):
 
         return HttpResponseRedirect(reverse('Upload'))
 
-def file_list(request):
-    files = FileUpload.objects.all()
+def file_list(request, **kwargs):
+    # media_url = settings.MEDIA_URL
+    # path_to_user_folder = media_url + "/upload/"
+    # context = {
+    #     'files': FileUpload.objects.all(),
+    #     'media_url': settings.MEDIA_URL,
+    # }      
+    # media_path = settings.MEDIA_ROOT
+    # myfiles = [f for f in listdir(media_path) if isfile(join(media_path, f))]
+    # files = os.listdir(media_path)
+    # print(files)
+    # for file in files:
+    #     if file:
+    #         file.join(media_path)
+    #     print(file)
+    media_path = settings.MEDIA_ROOT
+    files = os.listdir(media_path)
+    print(files)
+  
+    my_files = [upload_file.file for upload_file in FileUpload.objects.all()]
+
     return render(request, 'file_list.html', {"files": files})
 
 def upload_file(request):
     if request.method == "POST":
         form = FileUploadForm(request.POST, request.FILES)
         if form.is_valid():
+            title = FileUpload.objects.create(title=form.cleaned_data['title'])
+            new_file = FileUpload(file = request.FILES['file'])
             form.save()
             return redirect('files_list')
-    
     else:
         form = FileUploadForm()
     return render(request, 'upload_file.html', {"form": form})

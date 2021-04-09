@@ -27,7 +27,6 @@ urlpatterns = [
     path("signup/", SignupFormView.as_view(), name="Signup"),
     path("upload/", UploadView.as_view(), name="Upload"),
     path("files/", file_list, name="file_list"),
-    path("files/upload/", upload_file, name="upload_file")
 ]
 
 if settings.DEBUG:
