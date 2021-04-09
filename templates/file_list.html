@@ -1,5 +1,15 @@
 <h1> File List </h1>
-
+ {% csrf_token %}
 {{MEDIA_URL}}
 <a href="{% url "Upload" %}" type="button"> Upload File</a>
-{{files}}
+
+
+ {% for file in files %}
+<ul>
+
+   <li> {{file}}</li>
+    
+     </ul>
+
+     {% endfor%}
+  

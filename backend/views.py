@@ -50,10 +50,11 @@ def file_list(request, **kwargs):
     #     print(file)
     media_path = settings.MEDIA_ROOT
     files = os.listdir(media_path)
-    print(files)
-  
-    my_files = [upload_file.file for upload_file in FileUpload.objects.all()]
+    # string = ''.join(f for f in files)
+    # print(string)
+    # my_files = [f.files for f in FileUpload.objects.all().order_by('-date_time')]
 
+    
     return render(request, 'file_list.html', {"files": files})
 
 def upload_file(request):
