@@ -1,9 +1,10 @@
-from django.shortcuts import render, HttpResponseRedirect, reverse
+from django.shortcuts import render, HttpResponseRedirect, reverse, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
 from backend.forms import FileUploadForm
 from django.core.files.storage import FileSystemStorage
 from .forms import LoginForm, CustomUserForm
+from .models import MyCustomUser
 
 
 class LoginFormView(View):
@@ -22,8 +23,8 @@ class LoginFormView(View):
             if user:
                 login(request, user)
                 return HttpResponseRedirect(request.GET.get('next', reverse('Upload')))
-            # else:
-            #     return HttpResponseRedirect(reverse('Login'))
+            else:
+                return HttpResponseRedirect(reverse('Login'))
 
 
 class LogoutView(View):
@@ -42,10 +43,15 @@ class SignupFormView(View):
     def post(self, request):
         form = CustomUserForm(request.POST)
         if form.is_valid():
-            new_user = form.save()
-            new_user.set_password(new_user.password)
-            new_user.save()
-            return HttpResponseRedirect(request.GET.get('next', reverse('Login')))
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('Upload')
+        else:
+            return HttpResponseRedirect(reverse('Signup'))
+
 
 def FavoritesView(request):
     # fav_files = FileUpload.objects.get(id=favorite_id)
