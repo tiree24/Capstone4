@@ -14,12 +14,16 @@ class LoginFormView(View):
         return render(request, "generic_form.html", { 'form': form, 'heading': 'Login below'})
 
     def post(self, request):
+        print('posted!!')
         form = LoginForm(request.POST)
+        print('form', form)
         if form.is_valid():
+            print('clean data', form.cleaned_data)
             data = form.cleaned_data
+            print('data', data)
             user = authenticate(
                 request, email=data['email'], password=data['password'])
-            print(user)
+            print('user', user)
             if user:
                 login(request, user)
                 return HttpResponseRedirect(request.GET.get('next', reverse('Upload')))
@@ -34,23 +38,26 @@ class LogoutView(View):
         return HttpResponseRedirect(reverse('Login'))
 
 
-class SignupFormView(View):
+def signup_view(request):
 
-    def get(self, request):
-        form = CustomUserForm()
-        return render(request, 'generic_form.html', {'form': form, 'heading': "Sign Up below"})
-
-    def post(self, request):
+    if request.method == 'POST':
         form = CustomUserForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            login(request, user)
+            data = form.cleaned_data
+            new_user = MyCustomUser.objects.create_user(
+                username=data['username'],
+                email=data['email'],
+                password=data['password']
+            )
+            
+            # user = authenticate(email=email, password=password)
+            login(request, new_user)
             return redirect('Upload')
         else:
             return HttpResponseRedirect(reverse('Signup'))
+
+    form = CustomUserForm()
+    return render(request, 'generic_form.html', {'form': form, 'heading': "Sign Up below"})
 
 
 def FavoritesView(request):

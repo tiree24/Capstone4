@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from auth_app.views import LoginFormView, LogoutView, SignupFormView, FavoritesView
+from auth_app.views import LoginFormView, LogoutView, signup_view, FavoritesView
 from backend.views import UploadView, favorite
 
 urlpatterns = [
@@ -25,7 +25,7 @@ urlpatterns = [
     path("login/", LoginFormView.as_view(), name="Login"),
     path("logout/", LogoutView.as_view(), name="Logout"),
     path("upload/", UploadView.as_view(), name="Upload"),
-    path("signup/", SignupFormView.as_view(), name="Signup"),
+    path("signup/", signup_view, name="Signup"),
     path("favorites/", FavoritesView, name="Favorites"),
     # path("<int:upload_id>/favorite/", favorite, name="favorite")
 
