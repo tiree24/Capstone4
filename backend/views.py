@@ -1,9 +1,11 @@
-from django.shortcuts import render, HttpResponseRedirect, reverse
-from django.views.generic import View
+from django.shortcuts import render, HttpResponseRedirect, reverse, redirect
+from django.views.generic import View, ListView
 from .forms import FileUploadForm
 from .models import FileUpload
 from django.core.files.storage import FileSystemStorage
-from django.views.generic import ListView
+from capstone.settings import MEDIA_ROOT
+from capstone import settings
+import os
 
 
 def handler404(request, exception):
@@ -13,24 +15,28 @@ def handler404(request, exception):
 def handler500(request):
     return render(request, "500.html")
 
-
 class UploadView(View):
+   
     def get(self, request):
         form = FileUploadForm()
-        return render(request, "upload.html", {"form": form})
+        return render(request, "upload.html", {"form" : form })
 
     def post(self, request):
         context = {}
-        if request.method == 'POST':
-            file_uploaded = request.FILES['upload']
-            print(file_uploaded.name)
-            fs = FileSystemStorage()
-            name = fs.save(file_uploaded.name, file_uploaded)
-            context['url'] = fs.url(name)
-            context['form'] = FileUploadForm()
-            return render(request, "upload.html", context)
+        if request.method =='POST':
+            form = FileUploadForm(request.POST, request.FILES)
+            if form.is_valid():
+                new_upload = FileUpload.objects.create(title=request.POST['title'], 
+                upload=request.FILES['upload'],
+                search_str=request.POST['search_str'],
+                )
+                return redirect('file_list')
 
-        return HttpResponseRedirect(reverse('Upload'))
+
+def file_list(request):
+    files = FileUpload.objects.all()
+    return render(request, 'file_list.html', {"files": files})
+
 
 def favorite(self, request, upload_id):
     upload = FileUpload.objects.get(id=upload_id)
