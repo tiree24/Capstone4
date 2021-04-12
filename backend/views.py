@@ -30,6 +30,16 @@ class UploadView(View):
                 search_str=request.POST['search_str'],
                 )
                 return redirect('file_list')
+    def recent(self, request):
+        file = FileUpload.objects.all().order_by('-date_time')
+        return redirect('file_list')
+
+    def delete(self, request):
+        if os.path.isfile(self.upload.path):
+            os.remove(self.upload.path)
+
+
+
 
 
 
