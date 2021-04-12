@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse, redirect
-from django.views.generic import View 
+from django.views.generic import View, ListView
 from .forms import FileUploadForm
 from .models import FileUpload
 from django.core.files.storage import FileSystemStorage
@@ -43,3 +43,15 @@ def favorite(self, request, upload_id):
     upload.favorite = True
     upload.save()
     return HttpResponseRedirect(reverse('Upload'))
+
+class SearchView(ListView):
+    model = FileUpload
+    template_name = 'search.html'
+
+    def get(self, request, *args, **kwargs):
+        q = request.GET.get('q', '')
+        self.results = FileUpload.objects.filter(upload__icontains=q)
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(results=self.results, **kwargs)
