@@ -1,0 +1,22 @@
+<h1> File List </h1>
+ {% csrf_token %}
+{{MEDIA_URL}}
+<a href="{% url "Upload" %}" type="button"> Upload File</a>
+
+
+ {% for file in files %}
+<ul>
+
+   <li>
+<p><img style="width: 245px; height: 247px;"
+alt="Image description"
+ src="{{file.upload.url}}"/></p>
+<p>Title:{{file.title}}</p>
+<p>Date: {{file.date_time}}</p>
+<p>File Size:{{file.upload.size}}</p>
+ </li>
+ 
+     </ul>
+
+     {% endfor%}
+  
