@@ -5,14 +5,19 @@ from .forms import FileUploadForm
 from .models import FileUpload
 from django.core.files.storage import FileSystemStorage
 
+
 def my_test_500_view(request):
         # Return an "Internal Server Error" 500 response code.
         return HttpResponseServerError()
 
 class UploadView(View):
     def get(self, request):
+        uploads = FileUpload.objects.all()
         form = FileUploadForm()
-        return render(request, "upload.html", {"form" : form })
+        return render(request, "upload.html", {
+            "form" : form,
+            'uploads' : uploads,
+            })
 
     def post(self, request):
         context = {}
@@ -32,6 +37,14 @@ def favorite(self, request, upload_id):
     upload.favorite = True
     upload.save()
     return HttpResponseRedirect(reverse('Upload'))
+
+def favorites(request):
+    fav_files = FileUpload.objects.filter(favorite=True)
+    # request.user.favorites.add(fav_files)
+    return render(request, 'favorites.html', {
+        'favorites': fav_files
+    })
+    # return HttpResponseRedirect(reverse('recipe_detail', args=[favorite_id]))
 
 
     
