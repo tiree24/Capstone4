@@ -3,6 +3,13 @@
 {{MEDIA_URL}}
 <a href="{% url "Upload" %}" type="button"> Upload File</a>
 
+ <h1>Last three</h1>
+  {% for file in recent %}
+{{file.upload.url}} 
+{% endfor %}
+
+<h1>All Files</h1>
+
 
  {% for file in files %}
 <ul>
@@ -14,9 +21,21 @@ alt="Image description"
 <p>Title:{{file.title}}</p>
 <p>Date: {{file.date_time}}</p>
 <p>File Size:{{file.upload.size}}</p>
+<form method="post" action="{% url 'delete_file' file.pk %}">
+{% csrf_token %}
+<button type="submit">Delete</button></a>
+</form>
+
  </li>
  
      </ul>
 
      {% endfor%}
-  
+{% comment %} {% for file in deleted %}  
+<form method="post" action="{% url 'delete_file' %}">
+{% csrf_token %}
+<button type="submit">Delete</button></a>
+</form> {% endcomment %}
+{% comment %} <a href="{% url 'delete_file' deleted.pk %}"> {% endcomment %}
+
+{% comment %} {%endfor%}  {% endcomment %}

@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from auth_app.views import LoginFormView, LogoutView, SignupFormView
-from backend.views import UploadView, file_list
+from backend.views import UploadView, file_list, delete_file
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -27,6 +27,7 @@ urlpatterns = [
     path("signup/", SignupFormView.as_view(), name="Signup"),
     path("upload/", UploadView.as_view(), name="Upload"),
     path("files/", file_list, name="file_list"),
+    path("files/<int:pk>/", delete_file, name = "delete_file"),
     # path("upload/", upload_file, name="handle"),
 ]
 
