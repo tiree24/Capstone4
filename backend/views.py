@@ -3,6 +3,7 @@ from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.views.generic import View
 from .forms import FileUploadForm
 from .models import FileUpload
+from auth_app.models import MyCustomUser
 from django.core.files.storage import FileSystemStorage
 
 
@@ -11,11 +12,13 @@ def my_test_500_view(request):
         return HttpResponseServerError()
 
 class UploadView(View):
-    def get(self, request):
-        uploads = FileUpload.objects.all()
+    def get(self, request, user_id):
+        user = MyCustomUser.objects.get(id=user_id)
+        uploads = user.objects.all(files)
         form = FileUploadForm()
         return render(request, "upload.html", {
             "form" : form,
+            "user" : user,
             'uploads' : uploads,
             })
 
@@ -30,7 +33,7 @@ class UploadView(View):
             context['form'] = FileUploadForm()
             return render(request, "upload.html", context)
 
-        return HttpResponseRedirect(reverse('Upload'))
+        return HttpResponseRedirect(reverse('Upload', args=[user_id]))
 
 def favorite(self, request, upload_id):
     upload = FileUpload.objects.get(id=upload_id)
@@ -39,7 +42,7 @@ def favorite(self, request, upload_id):
     return HttpResponseRedirect(reverse('Upload'))
 
 def favorites(request):
-    fav_files = FileUpload.objects.filter(favorite=True)
+    fav_files = MyCustomUser.objects.all(favorites)
     # request.user.favorites.add(fav_files)
     return render(request, 'favorites.html', {
         'favorites': fav_files

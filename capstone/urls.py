@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("login/", LoginFormView.as_view(), name="Login"),
     path("logout/", LogoutView.as_view(), name="Logout"),
-    path("upload/", UploadView.as_view(), name="Upload"),
+    path("<int:user_id>/upload/", UploadView.as_view(), name="Upload"),
     path("signup/", signup_view, name="Signup"),
     path("favorites/", favorites, name="Favorites"),
     path("<int:upload_id>/favorite/", favorite, name="Favorite"),

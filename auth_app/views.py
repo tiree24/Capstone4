@@ -26,7 +26,7 @@ class LoginFormView(View):
             print('user', user)
             if user:
                 login(request, user)
-                return HttpResponseRedirect(request.GET.get('next', reverse('Upload')))
+                return HttpResponseRedirect(request.GET.get('next', reverse('Upload', args=[id])))
             else:
                 return HttpResponseRedirect(reverse('Login'))
 
