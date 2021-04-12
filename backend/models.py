@@ -6,6 +6,7 @@ class FileUpload(models.Model):
     upload = models.FileField(upload_to='settings.MEDIA_URL')
     date_time = models.DateTimeField(default=now)
     search_str = models.TextField(max_length=50)
+    favorite = models.BooleanField(default=False)
    
     
 

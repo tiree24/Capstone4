@@ -1,4 +1,3 @@
-from django.http import HttpResponseServerError
 from django.shortcuts import render, HttpResponseRedirect, reverse, redirect
 from django.views.generic import View 
 from .forms import FileUploadForm
@@ -9,10 +8,12 @@ from capstone import settings
 import os
 
 
+def handler404(request, exception):
+    return render(request, "404.html")
 
-def my_test_500_view(request):
-        # Return an "Internal Server Error" 500 response code.
-        return HttpResponseServerError()
+
+def handler500(request):
+    return render(request, "500.html")
 
 class UploadView(View):
    
@@ -32,7 +33,13 @@ class UploadView(View):
                 return redirect('file_list')
 
 
-
 def file_list(request):
     files = FileUpload.objects.all()
     return render(request, 'file_list.html', {"files": files})
+
+
+def favorite(self, request, upload_id):
+    upload = FileUpload.objects.get(id=upload_id)
+    upload.favorite = True
+    upload.save()
+    return HttpResponseRedirect(reverse('Upload'))

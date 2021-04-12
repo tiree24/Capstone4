@@ -21,3 +21,6 @@ https://docs.djangoproject.com/en/3.1/topics/http/file-uploads/
 
 migrations issues
 https://stackoverflow.com/questions/51349736/auth-user-model-refers-to-model-s-that-has-not-been-installed
+
+fixed login issue
+https://simpleisbetterthancomplex.com/tutorial/2017/02/18/how-to-create-user-sign-up-view.html

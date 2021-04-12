@@ -1,9 +1,10 @@
-from django.shortcuts import render, HttpResponseRedirect, reverse
+from django.shortcuts import render, HttpResponseRedirect, reverse, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
+from backend.forms import FileUploadForm
+from django.core.files.storage import FileSystemStorage
 from .forms import LoginForm, CustomUserForm
-from django.views.generic.edit import CreateView
-from django.urls import reverse_lazy
+from .models import MyCustomUser
 
 
 class LoginFormView(View):
@@ -13,18 +14,24 @@ class LoginFormView(View):
         return render(request, "generic_form.html", { 'form': form, 'heading': 'Login below'})
 
     def post(self, request):
+        print('posted!!')
         form = LoginForm(request.POST)
+        print('form', form)
         if form.is_valid():
+            print('clean data', form.cleaned_data)
             data = form.cleaned_data
+            print('data', data)
             user = authenticate(
                 request, email=data['email'], password=data['password'])
-            print(user)
+            print('user', user)
             if user:
                 login(request, user)
-                return HttpResponseRedirect(request.GET.get('next', reverse('Upload')))
-            # else:
-            #     return HttpResponseRedirect(reverse('Login'))
+                return redirect('Upload')
+            else:
+                return HttpResponseRedirect(reverse('Login'))
 
+        else:
+            return HttpResponseRedirect(reverse('Login'))
 
 class LogoutView(View):
 
@@ -33,16 +40,30 @@ class LogoutView(View):
         return HttpResponseRedirect(reverse('Login'))
 
 
-class SignupFormView(View):
+def signup_view(request):
 
-    def get(self, request):
-        form = CustomUserForm()
-        return render(request, 'generic_form.html', {'form': form, 'heading': "Sign Up below"})
-
-    def post(self, request):
+    if request.method == 'POST':
         form = CustomUserForm(request.POST)
         if form.is_valid():
-            new_user = form.save()
-            new_user.set_password(new_user.password)
-            new_user.save()
-            return HttpResponseRedirect(request.GET.get('next', reverse('Login')))
+            data = form.cleaned_data
+            new_user = MyCustomUser.objects.create_user(
+                username=data['username'],
+                email=data['email'],
+                password=data['password']
+            )
+            
+            # user = authenticate(email=email, password=password)
+            login(request, new_user)
+            return redirect('Upload')
+        else:
+            return HttpResponseRedirect(reverse('Signup'))
+
+    form = CustomUserForm()
+    return render(request, 'generic_form.html', {'form': form, 'heading': "Sign Up below"})
+
+
+def FavoritesView(request):
+    # fav_files = FileUpload.objects.get(id=favorite_id)
+    # request.user.author.favorites.add(fav_files)
+    return render(request, 'favorites.html')
+    # return HttpResponseRedirect(reverse('recipe_detail', args=[favorite_id]))

@@ -2,7 +2,7 @@ from .models import MyCustomUser
 from django import forms
 
 class CustomUserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
+    # password = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
         model = MyCustomUser
@@ -14,4 +14,7 @@ class LoginForm(forms.Form):
 
     class Meta:
         model = MyCustomUser
-        fields = ('email', 'password')
+        fields = ('email', 'password')  
+
+
+        
