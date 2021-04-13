@@ -6,26 +6,22 @@
 
    <h1> File List </h1>
 
-   {% csrf_token %}
-   {{MEDIA_URL}}
-
-
    {% for file in files %}
       <ul>
 
          <li>
             <p><img style="width: 245px; height: 247px;"
-            alt="Image description"
-            src="{{file.upload.url}}"/></p>
-            <p>Title:<a href='{{file.upload.url}}'>{{file.title}}</a></p>
-            <p>Date: {{file.date_time}}</p>
-            <p>File Size:{{file.upload.size}}</p>
-            <!-- <a href="/{{ file.upload.id }}/favorite/">|Favorite|</a> -->
-            <!-- <button type="submit" onclick='location.href="{{ file.upload.id }}/favorite/"'>Favorite</button> -->
-         </li>
+               alt="Image description"
+               src="{{file.upload.url}}"/></p>
+            <p><a href='{{file.upload.url}}'>{{file.title}}</a></p>
+            <p>{{file.date_time}}</p>
+            <a href="http://127.0.0.1:8000/favorite/{{ file.id }}">|Favorite|</a>
+            <a href="http://127.0.0.1:8000/unfavorite/{{ file.id }}">|Unfavorite|</a>
+            <!-- <button type="submit" onclick='location.href="{{ file.upload_id }}/favorite/"'>Favorite</button> -->
+      </li>
       
-      </ul>
-   {% endfor%}
+         </ul>
+   {% endfor %}
 
 {% endblock %}
   
