@@ -5,7 +5,8 @@
 
 <h1>Hello, {{ user.username }}.</h1>
 
-    <h1>Upload File</h1>
+    <h6>Upload Files Below</h6>
+    <p></p>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}

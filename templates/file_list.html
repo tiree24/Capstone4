@@ -4,22 +4,20 @@
 
 {% block content %}
 
-   <h1> File List </h1>
+   <h1> Dropbox Clone </h1>
 
    {% for file in files %}
       <ul>
 
-         <li>
             <p><img style="width: 245px; height: 247px;"
                alt="Image description"
                src="{{file.upload.url}}"/></p>
             <p><a href='{{file.upload.url}}'>{{file.title}}</a></p>
             <p>{{file.date_time}}</p>
-            <a href="http://127.0.0.1:8000/favorite/{{ file.id }}">|Favorite|</a>
-            <a href="http://127.0.0.1:8000/unfavorite/{{ file.id }}">|Unfavorite|</a>
-            <!-- <button type="submit" onclick='location.href="{{ file.upload_id }}/favorite/"'>Favorite</button> -->
-      </li>
-      
+            <button type="submit" onclick='location.href="http://127.0.0.1:8000/favorite/{{ file.id }}"'>Favorite</button>
+            <!-- <button type="submit" onclick='location.href="http://127.0.0.1:8000/unfavorite/{{ file.id }}"'>Unfavorite</button> -->
+
+     
          </ul>
    {% endfor %}
 

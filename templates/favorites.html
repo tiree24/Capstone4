@@ -9,7 +9,7 @@
     
     <ul>
         {% for favorite in favorites %}
-            <li><a href="/media/{{ favorite.upload }}/">{{ favorite.title }}</a></li>
+            <a href="/media/{{ favorite.upload }}/">{{ favorite.title }}</a>
         {% endfor %}
     </ul>
 {% endblock content %}

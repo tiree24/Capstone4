@@ -31,7 +31,7 @@ class LoginFormView(View):
             print('user', user)
             if user:
                 login(request, user)
-                return redirect('Upload')
+                return redirect('file_list')
             else:
                 return HttpResponseRedirect(reverse('Login'))
 
@@ -57,10 +57,8 @@ def signup(request):
                 email=data['email'],
                 password=data['password']
             )
-            
-            # user = authenticate(email=email, password=password)
             login(request, new_user)
-            return redirect('Upload')
+            return redirect('file_list')
         else:
             return HttpResponseRedirect(reverse('Signup'))
 
