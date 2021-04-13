@@ -1,4 +1,10 @@
+<p></p>
+<a href="/files/">|Files|</a> 
+<a href="/upload/">|Upload|</a> 
+<a href="/logout/">|Logout|</a>
+<a href="/favorites/">|Favorites|</a>
 
+<h1>Hello, {{ user.username }}.</h1>
 
 {% block content %}
     <h1>Upload File</h1>
@@ -15,7 +21,7 @@
     {% endblock %} 
 
 {% for upload in uploads %}
-    <p>Uploaded file: <a href="/^media/{{ favorite.upload }}/">{{upload}}</a>
+    <p>Uploaded file: <a href="/media/{{ favorite.upload }}/">{{upload}}</a>
     <p/>
     {% endfor %}
     

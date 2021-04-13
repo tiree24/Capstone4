@@ -1,7 +1,12 @@
 .env
 db.sqlite3
 <<<<<<< HEAD
+<<<<<<< HEAD
 media
 =======
 .vscode/
 >>>>>>> main
+=======
+media
+.vscode/
+>>>>>>> bea8a85e6b09b9efce85352c740375a5db3a2041

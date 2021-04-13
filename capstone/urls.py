@@ -17,19 +17,21 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from auth_app.views import LoginFormView, LogoutView, signup_view
+from auth_app.views import LoginFormView, LogoutView, signup
 from backend.views import UploadView, file_list, favorite, favorites, SearchView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("login/", LoginFormView.as_view(), name="Login"),
     path("logout/", LogoutView.as_view(), name="Logout"),
-    path("signup/", signup_view, name="Signup"),
-    path("favorites/", favorites, name="Favorites"),
-    path("<int:upload_id>/favorite/", favorite, name="Favorite"),
+    path("signup/", signup, name="Signup"),
     path("upload/", UploadView.as_view(), name="Upload"),
     path("files/", file_list, name="file_list"),
+    path("favorites/", favorites, name="Favorites"),
+    path("<int:upload_id>/favorite/", favorite, name="favorite"),
+    path("<int:upload_id>/unfavorite/", favorite, name="unfavorite"),
     path("search/", SearchView.as_view(), name='search'),
+
 ]
 
 if settings.DEBUG:
