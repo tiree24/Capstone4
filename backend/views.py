@@ -7,11 +7,6 @@ from django.core.files.storage import FileSystemStorage
 from capstone.settings import MEDIA_ROOT
 from capstone import settings
 import os
-from django.shortcuts import get_object_or_404
-from django.http import Http404
-
-
-
 
 
 def my_test_500_view(request):
@@ -35,21 +30,9 @@ class UploadView(View):
                 )
                 return redirect('file_list')
 
-    # def recent(self, request):
-    #     file = FileUpload.objects.all().order_by('-date_time')
-    #     obj= FileUpload.objects.filter(testfield=12).order_by('-id')[2]
-    #     return redirect('file_list')
-
-    
-
-
 def file_list(request):
-    test = FileUpload.objects.all()
-    files = FileUpload.objects.all().order_by('-date_time')
-    
+    files = FileUpload.objects.all().order_by('-date_time')  
     recent = FileUpload.objects.all().order_by('-date_time')[:3]
-    # breakpoint()
- 
     
     return render(request, 'file_list.html', {"files": files, "recent": recent})
 
@@ -66,6 +49,6 @@ def delete_file(request, pk):
 
 
 # deleting instance from db WORKS!!
-# delete file form sys WORKS!!
-# FILE_LIST NOT GRABBING THE CORRECT ATTRIBUTES FROM THE MODEL
+# delete file from sys WORKS!!
+
 
