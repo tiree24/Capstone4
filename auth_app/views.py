@@ -5,6 +5,8 @@ from backend.forms import FileUploadForm
 from django.core.files.storage import FileSystemStorage
 from .forms import LoginForm, CustomUserForm
 from .models import MyCustomUser
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 
 class LoginFormView(View):
@@ -33,6 +35,7 @@ class LoginFormView(View):
         else:
             return HttpResponseRedirect(reverse('Login'))
 
+@method_decorator(login_required, name='dispatch')
 class LogoutView(View):
 
     def get(self, request):
@@ -40,7 +43,7 @@ class LogoutView(View):
         return HttpResponseRedirect(reverse('Login'))
 
 
-def signup_view(request):
+def signup(request):
 
     if request.method == 'POST':
         form = CustomUserForm(request.POST)
