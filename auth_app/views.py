@@ -26,10 +26,12 @@ class LoginFormView(View):
             print('user', user)
             if user:
                 login(request, user)
-                return HttpResponseRedirect(request.GET.get('next', reverse('Upload')))
+                return redirect('Upload')
             else:
                 return HttpResponseRedirect(reverse('Login'))
 
+        else:
+            return HttpResponseRedirect(reverse('Login'))
 
 class LogoutView(View):
 
