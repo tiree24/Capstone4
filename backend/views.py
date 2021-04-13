@@ -74,14 +74,17 @@ def favorites(request):
 class SearchView(ListView):
     model = FileUpload
     template_name = 'search.html'
+    context_object_name = 'all_search_results'
 
-    def get(self, request, *args, **kwargs):
-        q = request.GET.get('q', '')
-        self.results = FileUpload.objects.filter(upload__icontains=q)
-        return super().get(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        return super().get_context_data(results=self.results, **kwargs)
+    def get_queryset(self):
+       results = super(SearchView, self).get_queryset()
+       query = self.request.GET.get('search')
+       if query:
+          postresult = FileUpload.objects.filter(search_str__contains=query)
+          results = postresult
+       else:
+           results = None
+       return results
 
 
     
