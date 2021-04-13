@@ -1,27 +1,43 @@
 {% extends 'base.html' %}
 
-{% block title %}Upload{% endblock title %}
+{% block title %}File Upload{% endblock title %}
 
 {% block content %}
 
-   <h1> File List </h1>
+ {% comment %} <h1>Last three</h1> {% endcomment %}
+  {% for file in recent %}
+{% comment %} <a href="^media/settings\.MEDIA_URL/{{ file }}">{{file}}</a>
 
-   {% for file in files %}
-      <ul>
+<p><img style="width: 245px; height: 247px;"
+alt="Image description"
+ src="{{file.upload.url}}"/></p>
+<p>Title:{{file.title}}</p>
+<p>Date: {{file.date_time}}</p>
+<a href="{{file.upload.url}}" download="{{file.upload.url}}"> Download File</a> {% endcomment %}
 
-         <li>
-            <p><img style="width: 245px; height: 247px;"
-               alt="Image description"
-               src="{{file.upload.url}}"/></p>
-            <p><a href='{{file.upload.url}}'>{{file.title}}</a></p>
-            <p>{{file.date_time}}</p>
-            <a href="http://127.0.0.1:8000/favorite/{{ file.id }}">|Favorite|</a>
-            <a href="http://127.0.0.1:8000/unfavorite/{{ file.id }}">|Unfavorite|</a>
-            <!-- <button type="submit" onclick='location.href="{{ file.upload_id }}/favorite/"'>Favorite</button> -->
-      </li>
-      
-         </ul>
-   {% endfor %}
+<h1>All Files</h1>
+
+
+   <li>
+<p><img style="width: 245px; height: 247px;"
+alt="Image description"
+ src="{{file.upload.url}}"/></p>
+<p>Title:{{file.title}}</p>
+<p>Date: {{file.date_time}}</p>
+<a href="http://127.0.0.1:8000/favorite/{{ file.id }}">|Favorite|</a>
+<a href="http://127.0.0.1:8000/unfavorite/{{ file.id }}">|Unfavorite|</a>
+<a href="{{file.upload.url}}" download="{{file.upload.url}}">|Download|</a>
+
+ </li>
+
+     </ul>
+
+   
+<form method="post" action="{% url 'delete_file' file.pk %}">
+{% csrf_token %}
+<button type="submit">Delete</button></a>
+</form>
+{% endfor%}
 
 {% endblock %}
-  
+

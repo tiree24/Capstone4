@@ -11,4 +11,12 @@
   <input type="submit" value="Submit!" class="btn btn-primary"/>
 </form>
 
+{% if heading == 'Sign Up below' %}
+  <p>Already a user? <a href='/login/'>Login.</a></p>
+{% endif %}
+
+{% if heading == 'Login below' %}
+  <p>Not a user? <a href='/signup/'>Sign up.</a></p>
+{% endif %}
+
 {% endblock %}

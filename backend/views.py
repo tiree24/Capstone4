@@ -41,10 +41,29 @@ class UploadView(View):
                 new_upload.save()
                 return redirect('file_list')
 
+                
 @login_required()
-def file_list(request):
-    files = FileUpload.objects.filter(created_by=request.user).order_by('-date_time')
-    return render(request, 'file_list.html', {"files": files})
+def file_list(request, **kwargs):
+    media_path = settings.MEDIA_ROOT
+    path = os.listdir(media_path)
+    files = FileUpload.objects.all().order_by('-date_time')  
+    recent = FileUpload.objects.all().order_by('-date_time')[:3]
+    
+    return render(request, 'file_list.html', {"files": files, "recent": recent, "path":path})
+
+
+@login_required()
+def delete_file(request, pk):
+    if request.method == "POST":
+        files = FileUpload.objects.get(pk=pk)
+        files.delete()
+        full_path = os.path.join(settings.MEDIA_ROOT, files.upload.path)
+        os.unlink(full_path)
+        return redirect('/files/')
+    return redirect('/files')
+# deleting instance from db WORKS!!
+# delete file from sys WORKS!!
+
 
 @login_required()
 def favorite(request, upload_id):
@@ -70,6 +89,7 @@ def favorites(request):
     return render(request, 'favorites.html', {
         'favorites': fav_files
     })
+
 
 class SearchView(ListView):
     model = FileUpload
