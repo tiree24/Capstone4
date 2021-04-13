@@ -18,7 +18,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from auth_app.views import LoginFormView, LogoutView, signup
-from backend.views import UploadView, file_list, favorite, favorites, SearchView
+from backend.views import UploadView, file_list, delete_file, favorite, favorites, SearchView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,6 +27,8 @@ urlpatterns = [
     path("logout/", LogoutView.as_view(), name="Logout"),
     path("signup/", signup, name="Signup"),
     path("upload/", UploadView.as_view(), name="Upload"),
+    path("files/", file_list, name="file_list"),
+    path("files/<int:pk>/", delete_file, name = "delete_file"),
     path("favorites/", favorites, name="Favorites"),
     path("favorite/<int:upload_id>/", favorite, name="favorite"),
     path("search/", SearchView.as_view(), name='search'),

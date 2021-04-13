@@ -1,10 +1,21 @@
 {% extends 'base.html' %}
 
-{% block title %}Upload{% endblock title %}
+{% block title %}File Upload{% endblock title %}
 
 {% block content %}
 
-   <h1> Dropbox Clone </h1>
+ {% comment %} <h1>Last three</h1>
+  {% for file in recent %}
+<a href="^media/settings\.MEDIA_URL/{{ file }}">{{file}}</a>
+
+<p><img style="width: 245px; height: 247px;"
+alt="Image description"
+ src="{{file.upload.url}}"/></p>
+<p>Title:{{file.title}}</p>
+<p>Date: {{file.date_time}}</p>
+<a href="{{file.upload.url}}" download="{{file.upload.url}}"> Download File</a> {% endcomment %}
+
+<h1>All Files</h1>
 
    {% for file in files %}
       <ul>
@@ -15,9 +26,14 @@
             <span><a href='{{file.upload.url}}'>{{file.title}}</a></span>
             <span>{{file.date_time}}</span>
             <span><button type="submit" onclick='location.href="http://127.0.0.1:8000/favorite/{{ file.id }}"'>Favorite</button></span>
-     
+            <span>
+               <form method="post" action="{% url 'delete_file' file.pk %}">
+                  {% csrf_token %}
+                  <button type="submit">Delete</button></a>
+               </form>
+            </span>
          </ul>
-   {% endfor %}
+{% endfor %}
 
 {% endblock %}
-  
+
