@@ -46,8 +46,8 @@ class UploadView(View):
 def file_list(request, **kwargs):
     media_path = settings.MEDIA_ROOT
     path = os.listdir(media_path)
-    files = FileUpload.objects.all().order_by('-date_time')  
-    recent = FileUpload.objects.all().order_by('-date_time')[:3]
+    files = FileUpload.objects.filter(created_by=request.user).order_by('-date_time')  
+    recent = FileUpload.objects.filter(created_by=request.user).order_by('-date_time')[:3]
     
     return render(request, 'file_list.html', {"files": files, "recent": recent, "path":path})
 
