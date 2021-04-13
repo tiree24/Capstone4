@@ -7,7 +7,7 @@ class FileUpload(models.Model):
     upload = models.FileField(upload_to='settings.MEDIA_URL')
     date_time = models.DateTimeField(default=now)
     search_str = models.TextField(max_length=50)
-    created_by = models.ManyToManyField(MyCustomUser, null=True, related_name="created_by")
+    created_by = models.ManyToManyField(MyCustomUser, related_name="created_by")
 
     # def __str__(self):
     #     return self.search_str

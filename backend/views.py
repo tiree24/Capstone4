@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse, redirect
-from django.views.generic import View 
+from django.views.generic import View, ListView
 from .forms import FileUploadForm
 from .models import FileUpload
 from auth_app.models import MyCustomUser
@@ -11,14 +11,6 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 
-# def my_test_500_view(request):
-#         # Return an "Internal Server Error" 500 response code.
-#         return HttpResponseServerError()
-
-# class UploadView(View):
-#     def get(self, request, user_id):
-#         user = MyCustomUser.objects.get(id=user_id)
-#         uploads = user.objects.all(files)
 def handler404(request, exception):
     return render(request, "404.html")
 
@@ -78,6 +70,18 @@ def favorites(request):
     return render(request, 'favorites.html', {
         'favorites': fav_files
     })
+
+class SearchView(ListView):
+    model = FileUpload
+    template_name = 'search.html'
+
+    def get(self, request, *args, **kwargs):
+        q = request.GET.get('q', '')
+        self.results = FileUpload.objects.filter(upload__icontains=q)
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(results=self.results, **kwargs)
 
 
     
