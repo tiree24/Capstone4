@@ -13,5 +13,10 @@
     <p>Uploaded file: <a href="{{ url }}">{{url}}</a><p/>
     {% endif %}
     {% endblock %} 
+
+{% for upload in uploads %}
+    <p>Uploaded file: <a href="/^media/{{ favorite.upload }}/">{{upload}}</a>
+    <p/>
+    {% endfor %}
     
 

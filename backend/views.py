@@ -44,6 +44,15 @@ def favorite(self, request, upload_id):
     upload.save()
     return HttpResponseRedirect(reverse('Upload'))
 
+
+def favorites(request):
+    fav_files = FileUpload.objects.filter(favorite=True)
+    # request.user.favorites.add(fav_files)
+    return render(request, 'favorites.html', {
+        'favorites': fav_files
+    })
+    # return HttpResponseRedirect(reverse('recipe_detail', args=[favorite_id]))
+
 class SearchView(ListView):
     model = FileUpload
     template_name = 'search.html'
