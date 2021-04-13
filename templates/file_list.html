@@ -5,6 +5,8 @@
 {% block content %}
 
    <h1> Dropbox Clone </h1>
+   <h4>Hello, {{ user.username }}.</h4>
+   <a class="nav-link" href="/upload/">Upload Files Here</a>
 
    {% for file in files %}
       <ul>
