@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Favorites{% endblock title %}
+
+{% block content %}
+ 
+    <h1>{{ heading|default:"Favorites" }}</h1>
+    <h3>Favorites:</h3>
+    
+    <ul>
+        {% for favorite in favorites %}
+            <li><a href="/media/{{ favorite.upload }}/">{{ favorite.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

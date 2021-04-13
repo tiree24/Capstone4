@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Search{% endblock title %}
+
+{% block content %}
+
+<form type="get" action=" ">
+  <input id="search_box" type="text" name="search" placeholder="Search..." />
+  <button id="search_submit" type="submit">Submit</button>
+</form>
+
+{% if all_search_results %} {% for file in all_search_results %}
+<ul>
+  <li>
+    <p><img style="width: 245px; height: 247px" alt="Image description" src="{{file.upload.url}}" /></p>
+    <p>Title:<a href="{{file.upload.url}}">{{file.title}}</a></p>
+    <p>Date: {{file.date_time}}</p>
+    <p>File Size:{{file.upload.size}}</p>
+    <!-- <a href="/{{ file.upload.id }}/favorite/">|Favorite|</a> -->
+    <!-- <button type="submit" onclick='location.href="{{ file.upload.id }}/favorite/"'>Favorite</button> -->
+  </li>
+</ul>
+
+{% endfor%} {% else %}
+<h3>Try Again</h3>
+{% endif %}
+
+{% endblock content %}

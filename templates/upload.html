@@ -1,6 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Upload{% endblock title %}
 
 
 {% block content %}
+
+<h1>Hello, {{ user.username }}.</h1>
+
     <h1>Upload File</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -11,7 +17,13 @@
 
 {% if url %}
     <p>Uploaded file: <a href="{{ url }}">{{url}}</a><p/>
-    {% endif %}
-    {% endblock %} 
-    
+{% endif %}
+
+
+{% for upload in uploads %}
+    <p>Uploaded file: <a href="/media/{{ favorite.upload }}/">{{upload}}</a>
+    <p/>
+{% endfor %}
+
+{% endblock %}    
 

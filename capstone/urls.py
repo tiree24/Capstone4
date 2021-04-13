@@ -16,20 +16,28 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf import settings
-from auth_app.views import LoginFormView, LogoutView, SignupFormView
-from backend.views import UploadView, file_list, delete_file
 from django.conf.urls.static import static
+from auth_app.views import LoginFormView, LogoutView, signup
+from backend.views import UploadView, file_list, delete_file, favorite, unfavorite, favorites, SearchView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("", LoginFormView.as_view()),
     path("login/", LoginFormView.as_view(), name="Login"),
     path("logout/", LogoutView.as_view(), name="Logout"),
-    path("signup/", SignupFormView.as_view(), name="Signup"),
+    path("signup/", signup, name="Signup"),
     path("upload/", UploadView.as_view(), name="Upload"),
     path("files/", file_list, name="file_list"),
     path("files/<int:pk>/", delete_file, name = "delete_file"),
-    # path("upload/", upload_file, name="handle"),
+    path("favorites/", favorites, name="Favorites"),
+    path("favorite/<int:upload_id>/", favorite, name="favorite"),
+    path("unfavorite/<int:upload_id>/", unfavorite, name="unfavorite"),
+    path("search/", SearchView.as_view(), name='search'),
+
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = 'backend.views.handler404'
+handler500 = 'backend.views.handler500'
