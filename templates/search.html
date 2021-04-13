@@ -1,3 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Search{% endblock title %}
+
+{% block content %}
+
 <form type="get" action=" ">
   <input id="search_box" type="text" name="search" placeholder="Search..." />
   <button id="search_submit" type="submit">Submit</button>
@@ -18,3 +24,5 @@
 {% endfor%} {% else %}
 <h3>Try Again</h3>
 {% endif %}
+
+{% endblock content %}
