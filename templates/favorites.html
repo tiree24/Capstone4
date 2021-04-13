@@ -1,1 +1,25 @@
-<h1>Favorites</h1>
+<head>
+    <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> -->
+
+</head>
+
+
+<body>
+    <button type="submit" onclick='location.href="/logout/"'>Logout</button>
+    <h1>{{ heading|default:"Favorites" }}</h1>
+    <h3>Favorites:</h3>
+    
+    <ul>
+        {% for favorite in favorites %}
+            <li><a href="/^media/{{ favorite.upload }}/">{{ favorite.search_str }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <p>
+
+    </p>
+
+    <!-- <a href="/addrecipe/">Add Recipe</a> -->
+
+</body>
