@@ -5,7 +5,8 @@
 
  <h1>Last three</h1>
   {% for file in recent %}
-{{file.upload.url}} 
+{% comment %} {{file.upload.url}}  {% endcomment %}
+{{file.model.upload}}
 {% endfor %}
 
 <h1>All Files</h1>
@@ -17,20 +18,23 @@
    <li>
 <p><img style="width: 245px; height: 247px;"
 alt="Image description"
- src="{{file.upload.url}}"/></p>
-<p>Title:{{file.title}}</p>
-<p>Date: {{file.date_time}}</p>
-<p>File Size:{{file.upload.size}}</p>
+ src="{{file.model.upload.url}}"/></p>
+<p>Title:{{file.model.title}}</p>
+<p>Date: {{file.upload.date_time}}</p>
+<p>File Size:{{file.model.upload.size}}</p>
+ </li>
+
+     </ul>
+
+    
+
+   
 <form method="post" action="{% url 'delete_file' file.pk %}">
 {% csrf_token %}
 <button type="submit">Delete</button></a>
 </form>
+{% endfor%}
 
- </li>
- 
-     </ul>
-
-     {% endfor%}
 {% comment %} {% for file in deleted %}  
 <form method="post" action="{% url 'delete_file' %}">
 {% csrf_token %}

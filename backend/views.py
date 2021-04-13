@@ -34,6 +34,7 @@ class UploadView(View):
                 search_str=request.POST['search_str'],
                 )
                 return redirect('file_list')
+
     # def recent(self, request):
     #     file = FileUpload.objects.all().order_by('-date_time')
     #     obj= FileUpload.objects.filter(testfield=12).order_by('-id')[2]
@@ -45,12 +46,16 @@ class UploadView(View):
 def file_list(request):
     files = FileUpload.objects.all().order_by('-date_time')
     recent = FileUpload.objects.all().order_by('-date_time')[:3]
+    # breakpoint()
     return render(request, 'file_list.html', {"files": files, "recent": recent})
 
 def delete_file(request, pk):
     if request.method == "POST":
         files = FileUpload.objects.get(pk=pk)
-        files.deleted()
+        # breakpoint()
+        files.delete()
+        full_path = os.path.join(settings.MEDIA_ROOT, files.upload.path)
+        os.unlink(full_path)
         return redirect('/files/')
     return redirect('/files')
 
