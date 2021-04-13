@@ -33,17 +33,17 @@ class LoginFormView(View):
                 login(request, user)
                 return redirect('file_list')
             else:
-                return HttpResponseRedirect(reverse('Login'))
+                return HttpResponseRedirect(reverse('login'))
 
         else:
-            return HttpResponseRedirect(reverse('Login'))
+            return HttpResponseRedirect(reverse('login'))
 
 @method_decorator(login_required, name='dispatch')
 class LogoutView(View):
 
     def get(self, request):
         logout(request)
-        return HttpResponseRedirect(reverse('Login'))
+        return HttpResponseRedirect(reverse('login'))
 
 
 def signup(request):
@@ -60,7 +60,7 @@ def signup(request):
             login(request, new_user)
             return redirect('file_list')
         else:
-            return HttpResponseRedirect(reverse('Signup'))
+            return HttpResponseRedirect(reverse('signup'))
 
     form = CustomUserForm()
     return render(request, 'generic_form.html', {'form': form, 'heading': "Sign Up below"})

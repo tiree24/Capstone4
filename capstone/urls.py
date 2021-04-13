@@ -20,14 +20,15 @@ from django.conf.urls.static import static
 from auth_app.views import LoginFormView, LogoutView, signup
 from backend.views import UploadView, file_list, favorite, favorites, SearchView
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", file_list, name="file_list"),
-    path("login/", LoginFormView.as_view(), name="Login"),
-    path("logout/", LogoutView.as_view(), name="Logout"),
+    path("login/", LoginFormView.as_view(), name="login"),
+    path("logout/", LogoutView.as_view(), name="logout"),
     path("signup/", signup, name="Signup"),
-    path("upload/", UploadView.as_view(), name="Upload"),
-    path("favorites/", favorites, name="Favorites"),
+    path("upload/", UploadView.as_view(), name="upload"),
+    path("favorites/", favorites, name="favorites"),
     path("favorite/<int:upload_id>/", favorite, name="favorite"),
     path("search/", SearchView.as_view(), name='search'),
 ]

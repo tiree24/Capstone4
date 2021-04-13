@@ -58,7 +58,7 @@ def favorite(request, upload_id):
     elif upload not in favorites:
         user.favorites.add(upload)
         upload.save()
-    return HttpResponseRedirect(reverse('Favorites'))
+    return HttpResponseRedirect(reverse('favorites'))
 
 @login_required()
 def favorites(request):
