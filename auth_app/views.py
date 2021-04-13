@@ -13,7 +13,10 @@ class LoginFormView(View):
 
     def get(self, request):
         form = LoginForm()
-        return render(request, "generic_form.html", { 'form': form, 'heading': 'Login below'})
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(reverse('file_list'))
+        else:
+            return render(request, "generic_form.html", { 'form': form, 'heading': 'Login below'})
 
     def post(self, request):
         print('posted!!')

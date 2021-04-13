@@ -1,33 +1,31 @@
-<h1> File List </h1>
+{% extends 'base.html' %}
 
-<p></p>
-<a href="/files/">|Files|</a> 
-<a href="/upload/">|Upload|</a> 
-<a href="/favorites/">|Favorites|</a>
-<a href="/logout/">|Logout|</a>
+{% block title %}Upload{% endblock title %}
 
- {% csrf_token %}
-{{MEDIA_URL}}
-<a href="{% url "Upload" %}" type="button"> Upload File</a>
+{% block content %}
 
+   <h1> File List </h1>
 
- {% for file in files %}
-   <ul>
-
-      <li>
-   <p><img style="width: 245px; height: 247px;"
-   alt="Image description"
-   src="{{file.upload.url}}"/></p>
-   <p>Title:<a href='{{file.upload.url}}'>{{file.title}}</a></p>
-   <p>Date: {{file.date_time}}</p>
-   <p>File Size:{{file.upload.size}}</p>
-   <!-- <a href="/{{ file.upload.id }}/favorite/">|Favorite|</a> -->
-   <!-- <button type="submit" onclick='location.href="{{ file.upload.id }}/favorite/"'>Favorite</button> -->
+   {% csrf_token %}
+   {{MEDIA_URL}}
 
 
-   </li>
-   
+   {% for file in files %}
+      <ul>
+
+         <li>
+            <p><img style="width: 245px; height: 247px;"
+            alt="Image description"
+            src="{{file.upload.url}}"/></p>
+            <p>Title:<a href='{{file.upload.url}}'>{{file.title}}</a></p>
+            <p>Date: {{file.date_time}}</p>
+            <p>File Size:{{file.upload.size}}</p>
+            <!-- <a href="/{{ file.upload.id }}/favorite/">|Favorite|</a> -->
+            <!-- <button type="submit" onclick='location.href="{{ file.upload.id }}/favorite/"'>Favorite</button> -->
+         </li>
+      
       </ul>
+   {% endfor%}
 
-     {% endfor%}
+{% endblock %}
   

@@ -1,17 +1,9 @@
-<head>
-    <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> -->
+{% extends 'base.html' %}
 
-</head>
+{% block title %}Favorites{% endblock title %}
 
-<body>
-    <p></p>
-    <a href="/files/">|Files|</a> 
-    <a href="/upload/">|Upload|</a> 
-    <a href="/favorites/">|Favorites|</a>
-    <a href="/logout/">|Logout|</a>
+{% block content %}
  
-    <!-- <button type="submit" onclick='location.href="/logout/"'>Logout</button> -->
     <h1>{{ heading|default:"Favorites" }}</h1>
     <h3>Favorites:</h3>
     
@@ -20,9 +12,4 @@
             <li><a href="/media/{{ favorite.upload }}/">{{ favorite.title }}</a></li>
         {% endfor %}
     </ul>
-
-    <p>
-
-    </p>
-
-</body>
+{% endblock content %}

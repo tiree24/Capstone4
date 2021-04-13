@@ -22,6 +22,7 @@ from backend.views import UploadView, file_list, favorite, favorites, SearchView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("", LoginFormView.as_view()),
     path("login/", LoginFormView.as_view(), name="Login"),
     path("logout/", LogoutView.as_view(), name="Logout"),
     path("signup/", signup, name="Signup"),
