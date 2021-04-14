@@ -18,11 +18,11 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from auth_app.views import LoginFormView, LogoutView, signup
-from backend.views import UploadView, file_list, delete_file, favorite, unfavorite, favorites, SearchView
+from backend.views import UploadView, file_list, delete_file, favorite, favorites, SearchView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", LoginFormView.as_view()),
+    path("", file_list, name="file_list"),
     path("login/", LoginFormView.as_view(), name="Login"),
     path("logout/", LogoutView.as_view(), name="Logout"),
     path("signup/", signup, name="Signup"),
@@ -31,13 +31,13 @@ urlpatterns = [
     path("files/<int:pk>/", delete_file, name = "delete_file"),
     path("favorites/", favorites, name="Favorites"),
     path("favorite/<int:upload_id>/", favorite, name="favorite"),
-    path("unfavorite/<int:upload_id>/", unfavorite, name="unfavorite"),
     path("search/", SearchView.as_view(), name='search'),
-
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
 
 handler404 = 'backend.views.handler404'
 handler500 = 'backend.views.handler500'

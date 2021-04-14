@@ -14,7 +14,6 @@ from django.utils.decorators import method_decorator
 def handler404(request, exception):
     return render(request, "404.html")
 
-
 def handler500(request):
     return render(request, "500.html")
 
@@ -69,18 +68,15 @@ def delete_file(request, pk):
 def favorite(request, upload_id):
     upload = FileUpload.objects.get(id=upload_id)
     user = MyCustomUser.objects.get(id=request.user.id)
+    favorites = user.favorites.all()
 
-# if upload_id not in user.favorites:
-    user.favorites.add(upload)
-    upload.save()
-    return HttpResponseRedirect(reverse('Favorites'))
+    if upload in favorites:
+        user.favorites.remove(upload)
+        upload.save()
 
-@login_required()
-def unfavorite(request, upload_id):
-    upload = FileUpload.objects.get(id=upload_id)
-    user = MyCustomUser.objects.get(id= request.user.id)
-    user.favorites.remove(upload)
-    upload.save()
+    elif upload not in favorites:
+        user.favorites.add(upload)
+        upload.save()
     return HttpResponseRedirect(reverse('Favorites'))
 
 @login_required()
