@@ -9,16 +9,27 @@
 </form>
 
 {% if all_search_results %} {% for file in all_search_results %}
-<ul>
-  
-    <span><img style="width: 25px; height: 25px" alt="Image description" src="{{file.upload.url}}" /></span>
-    <span>Title:<a href="{{file.upload.url}}">{{file.title}}</a></span>
-    <span>Date: {{file.date_time}}</span>
- 
-</ul>
+
+  <div class="card" style="width: 18rem;">
+    <img src="{{file.upload.url}}" class="card-img-top" alt="{{file.title}}" />
+    <div class="card-body">
+    <h5 class="card-title"><a href='{{file.upload.url}}'>{{file.title}}</a></h5>
+    <p class="card-text">{{file.date_time}}</p>
+    <p><a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn btn-primary">Favorite</a></p>
+    </li>
+  </ul>
+  </div>
 
 {% endfor%} {% else %}
 <h3>Try Again</h3>
 {% endif %}
 
 {% endblock content %}
+
+<!-- <ul>
+  
+  <span><img style="width: 25px; height: 25px" alt="Image description" src="{{file.upload.url}}" /></span>
+  <span>Title:<a href="{{file.upload.url}}">{{file.title}}</a></span>
+  <span>Date: {{file.date_time}}</span>
+
+</ul> -->

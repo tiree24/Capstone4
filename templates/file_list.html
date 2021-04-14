@@ -7,28 +7,12 @@
    <a class="nav-link" href="/upload/">Upload Files Here</a>
 
    {% for file in files %}
-      <!-- <ul>
-            <span><img style="width: 25px; height: 25px;"
-               alt="Image description"
-               src="{{file.upload.url}}"/></span>
-            <span><a href='{{file.upload.url}}'>{{file.title}}</a></span>
-            <span>{{file.date_time}}</span>
-            <span><button type="submit" onclick='location.href="http://127.0.0.1:8000/favorite/{{ file.id }}"'>Favorite</button></span>
-     
-         </ul> -->
-
-         <div class="card" style="width: 100rem;">
-            <!-- <div class="card-header">
-              Uploads
-            </div> -->
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-             <span><img style="width: 25px; height: 25px;"
-                alt="Image description"
-                src="{{file.upload.url}}"/></span>
-             <span><a href='{{file.upload.url}}'>{{file.title}}</a></span>
-             <span>{{file.date_time}}</span>
-             <span><button type="submit" onclick='location.href="http://127.0.0.1:8000/favorite/{{ file.id }}"'>Favorite</button></span>
+         <div class="card" style="width: 18rem;">
+            <img src="{{file.upload.url}}" class="card-img-top" alt="{{file.title}}" />
+            <div class="card-body">
+            <h5 class="card-title"><a href='{{file.upload.url}}'>{{file.title}}</a></h5>
+             <p class="card-text">{{file.date_time}}</p>
+             <p><a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn btn-primary">Favorite</a></p>
             </li>
           </ul>
           </div>
@@ -36,3 +20,15 @@
 
 {% endblock %}
   
+<!-- <div class="card" style="width: 18rem;">
+   <ul class="list-group list-group-flush">
+     <li class="list-group-item">
+      <span><img style="width: 25px; height: 25px;"
+         alt="Image description"
+         src="{{file.upload.url}}"/></span>
+      <span><a href='{{file.upload.url}}'>{{file.title}}</a></span>
+      <span>{{file.date_time}}</span>
+      <span><button type="submit" onclick='location.href="http://127.0.0.1:8000/favorite/{{ file.id }}"'>Favorite</button></span>
+     </li>
+   </ul>
+   </div> -->

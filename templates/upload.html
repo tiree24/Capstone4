@@ -11,15 +11,5 @@
         <input type="submit" value="submit" />
     </form>
 
-{% if url %}
-    <p>Uploaded file: <a href="{{ url }}">{{url}}</a><p/>
-{% endif %}
-
-
-{% for upload in uploads %}
-    <p>Uploaded file: <a href="/media/{{ favorite.upload }}/">{{upload}}</a>
-    <p/>
-{% endfor %}
-
 {% endblock %}    
 
