@@ -22,16 +22,17 @@ from backend.views import UploadView, file_list, delete_file, favorite, favorite
 from django.views.static import serve
 from django.conf.urls import url
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", file_list, name="file_list"),
-    path("login/", LoginFormView.as_view(), name="Login"),
-    path("logout/", LogoutView.as_view(), name="Logout"),
+    path("login/", LoginFormView.as_view(), name="login"),
+    path("logout/", LogoutView.as_view(), name="logout"),
     path("signup/", signup, name="Signup"),
-    path("upload/", UploadView.as_view(), name="Upload"),
+    path("upload/", UploadView.as_view(), name="upload"),
+    path("favorites/", favorites, name="favorites"),
     path("files/", file_list, name="file_list"),
     path("files/<int:pk>/", delete_file, name = "delete_file"),
-    path("favorites/", favorites, name="Favorites"),
     path("favorite/<int:upload_id>/", favorite, name="favorite"),
     path("search/", SearchView.as_view(), name='search'),
 ]

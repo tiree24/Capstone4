@@ -1,39 +1,39 @@
 {% extends 'base.html' %}
 
-{% block title %}File Upload{% endblock title %}
-
 {% block content %}
+<h1>{{ heading|default:"Dropbox Clone" }}</h1>
 
- {% comment %} <h1>Last three</h1>
-  {% for file in recent %}
-<a href="^media/settings\.MEDIA_URL/{{ file }}">{{file}}</a>
-
-<p><img style="width: 245px; height: 247px;"
-alt="Image description"
- src="{{file.upload.url}}"/></p>
-<p>Title:{{file.title}}</p>
-<p>Date: {{file.date_time}}</p>
-<a href="{{file.upload.url}}" download="{{file.upload.url}}"> Download File</a> {% endcomment %}
-
-<h1>All Files</h1>
+   <h4>Hello, {{ user.username }}.</h4>
+   {% if not files %}
+   <a class="nav-link" href="/upload/">Upload Files Here</a>
+   {% endif %}
 
    {% for file in files %}
-      <ul>
-
-            <span><img style="width: 25px; height: 25px;"
-               alt="Image description"
-               src="{{file.upload.url}}"/></span>
-            <span><a href='{{file.upload.url}}'>{{file.title}}</a></span>
-            <span>{{file.date_time}}</span>
-            <span><button type="submit" onclick='location.href="http://127.0.0.1:8000/favorite/{{ file.id }}"'>Favorite</button></span>
-            <span>
-               <form method="post" action="{% url 'delete_file' file.pk %}">
-                  {% csrf_token %}
-                  <button type="submit">Delete</button></a>
-               </form>
-            </span>
-         </ul>
-{% endfor %}
+         <div class="card" style="width: 20rem;">
+            <img src="{{file.upload.url}}" class="card-img-top" alt="{{file.title}}" />
+            <div class="card-body">
+            <h5 class="card-title"><a href='{{file.upload.url}}'>{{file.title}}</a></h5>
+            <p class="card-text">{{file.date_time}}</p>
+            <a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn btn-primary">Favorite</a>
+            <a href="{{file.upload.url}}" download="{{file.upload.url}}" class="btn btn-primary">Download</a>
+            <form method="post" action="{% url 'delete_file' file.pk %}" style="display: inline;">
+               {% csrf_token %}
+               <button type="submit" class="btn btn-danger">Delete</button></a>
+            </form>
+          </div>
+   {% endfor %}
 
 {% endblock %}
-
+  
+<!-- <div class="card" style="width: 18rem;">
+   <ul class="list-group list-group-flush">
+     <li class="list-group-item">
+      <span><img style="width: 25px; height: 25px;"
+         alt="Image description"
+         src="{{file.upload.url}}"/></span>
+      <span><a href='{{file.upload.url}}'>{{file.title}}</a></span>
+      <span>{{file.date_time}}</span>
+      <span><button type="submit" onclick='location.href="http://127.0.0.1:8000/favorite/{{ file.id }}"'>Favorite</button></span>
+     </li>
+   </ul>
+   </div> -->
