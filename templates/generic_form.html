@@ -5,11 +5,13 @@
 
 <h1>{{heading}}</h1>
 
+<div>
 <form action="" method="post">
   {% csrf_token %} 
   {{ form.as_p }}
   <input type="submit" value="Submit!" class="btn btn-primary"/>
 </form>
+</div>
 
 {% if heading == 'Sign Up below' %}
   <p>Already a user? <a href='/login/'>Login.</a></p>
