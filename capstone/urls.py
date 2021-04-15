@@ -18,7 +18,9 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from auth_app.views import LoginFormView, LogoutView, signup
-from backend.views import UploadView, file_list, favorite, favorites, SearchView
+from backend.views import UploadView, file_list, delete_file, favorite, favorites, SearchView
+from django.views.static import serve
+from django.conf.urls import url
 
 
 urlpatterns = [
@@ -29,12 +31,17 @@ urlpatterns = [
     path("signup/", signup, name="Signup"),
     path("upload/", UploadView.as_view(), name="upload"),
     path("favorites/", favorites, name="favorites"),
+    path("files/", file_list, name="file_list"),
+    path("files/<int:pk>/", delete_file, name = "delete_file"),
     path("favorite/<int:upload_id>/", favorite, name="favorite"),
     path("search/", SearchView.as_view(), name='search'),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+else:
+    urlpatterns += [url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT})]
 
 handler404 = 'backend.views.handler404'
 handler500 = 'backend.views.handler500'
