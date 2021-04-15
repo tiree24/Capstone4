@@ -2,7 +2,10 @@
 
 {% block content %}
 
-<h1>{{ heading|default:"Upload Files Here" }}</h1>
+<div class="container">
+  <div class="row">
+  </div>
+  <h1>{{ heading|default:"Upload Files Here" }}</h1>
 
     <p></p>
     <form method="post" enctype="multipart/form-data">
@@ -10,6 +13,10 @@
         {{ form.as_p }}
         <input type="submit" value="submit" />
     </form>
+    <div class="row">
+    </div>
+    </div>
+</div>
 
 {% endblock %}    
 

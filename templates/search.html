@@ -5,7 +5,7 @@
 
 <form type="get" action=" ">
   <input id="search_box" type="text" name="search" placeholder="Search..." />
-  <button id="search_submit" type="submit">Submit</button>
+  <button id="search_submit" class="btn btn-primary btn-sm" type="submit">Submit</button>
 </form>
 
 {% if all_search_results %} {% for file in all_search_results %}
@@ -15,7 +15,7 @@
     <div class="card-body">
     <h5 class="card-title"><a href='{{file.upload.url}}'>{{file.title}}</a></h5>
     <p class="card-text">{{file.date_time}}</p>
-    <p><a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn btn-primary">Favorite</a></p>
+    <p><a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn btn-primary btn-sm">Favorite</a></p>
     </li>
   </ul>
   </div>
