@@ -1,19 +1,25 @@
-<!-- <nav class="nav">
-    <a class="nav-link active" href="/">Home</a> 
-    <a class="nav-link" href="/upload/">Upload</a>
-    <a class='nav-link' href='/favorites/'>Favorites</a>
-    <a class="nav-link" href="/search/">Search</a>
-    <a class="nav-link" href="/logout/">Logout</a>
-</nav> -->
+
+{% if request.user.is_authenticated %}
+
+    <nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark bg-primary">
+        <a class="nav-link active text-secondary" href="/">Home</a> 
+        <a class="nav-link text-secondary" href="/upload/">Upload</a>
+        <a class='nav-link text-secondary' href='/favorites/'>Favorites</a>
+        <a class="nav-link text-secondary" href="/search/">Search</a>
+        <a class="nav-link text-secondary" href="/logout/">Logout</a>
+    </nav>
+
+{% endif %}
+
+{% if request.user.is_authenticated == False %}
+
+    <nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark bg-primary">
+        <a class="nav-link active text-secondary" href="/login">Login</a> 
+        <a class="nav-link text-secondary" href="/signup/">Signup</a>
+        
+    </nav>
+
+{% endif %}
 
 
-<nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-  <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-    <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a></li>
-    <li class="breadcrumb-item"><a href="/upload/">Upload</a></li>
-    <li class="breadcrumb-item"><a href="/favorites/">Favorites</a></li>
-    <li class="breadcrumb-item"><a href="/search/">Search</a></li>
-    <li class="breadcrumb-item"><a href="/logout/">Logout</a></li>
-  </ol>
-</nav>
 

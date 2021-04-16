@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'auth_app',
     'backend',
+    'django_inlinecss',
 ]
 
 

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title>{% block title %}Dropbox Clone{% endblock %}</title>
+        <title>{% block title %}"Dropii, Your Storage In The Cloud."{% endblock %}</title>
         
         <!-- Favicon -->
         <link href="/static/assets/img/brand/favicon.png" rel="icon" type="image/png">
@@ -20,12 +20,9 @@
         <!-- Argon CSS -->
         <link type="text/css" href="/static/assets/css/argon.min.css" rel="stylesheet">
 
-
     </head>
     <body>
-        {% if request.user.is_authenticated %}
         {% include 'navbar.html' %}
-        {% endif %}
 
         <div class='main-content'>
             {% block content %}

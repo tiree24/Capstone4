@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
- 
+
+<div class="container" style="width:50%; margin:auto; margin-left: 33%;">
     <h1>{{ heading|default:"Favorites" }}</h1>
-    
-    <ul>
+</div>
+
+<div class="container" style="width:50%; margin:auto; margin-left: 33%;">
         {% for favorite in favorites %}
+        <div class="row">
+        <div class="col-sm">
             <div class="card" style="width: 18rem;">
                 <img src="{{favorite.upload.url}}" class="card-img-top" alt="{{favorite.title}}" />
                 <div class="card-body">
@@ -14,9 +18,13 @@
                 <p><a href="http://127.0.0.1:8000/favorite/{{ favorite.id }}" class="btn btn-primary btn-sm">Favorite</a></p>
                 </li>
             </div>
+        </div>
+    </div>
         {% endfor %}
-    </ul>
-{% endblock content %}
+    {% endblock content %}
+
+</div>
+
 
 <!-- <span><img style="width: 25px; height: 25px;"
     alt="Image description"
