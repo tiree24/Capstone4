@@ -1,27 +1,77 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{ heading|default:"Dropbox Clone" }}</h1>
+
+
+<div class="container">
+  <div class="row">   
+   <div class="col-sm-4", style="background-color:#f4f5f7;">
+      <div>
+<center><h1>{{ heading|default:"Dropbox Clone" }}</h1></center>
 
    <h4>Hello, {{ user.username }}.</h4>
    {% if not files %}
    <a class="nav-link" href="/upload/">Upload Files Here</a>
    {% endif %}
+   
+   <p><i class="fas fa-home">Home</i></p>
+   <p><i class="fa fa-upload">Upload</i></p>
+   <p><i class="fas fa-heart">Favorites</i></p>
+   
+   
+   
 
+   
+
+</div>
+    </div>
+    
+    
+{% comment %} <p>Recents</p>
+{% for file in recent %}
+
+   <div class="container">
+  <div class="row">
+    <div class="col-sm">
+     <span>{{file.title}}
+      <img src="{{file.upload.url}}" class="card-img-top" alt="{{file.title}}" />
+      </span>
+    </div>
+    <div class="col-sm">
+      <span>hey</span>
+    </div>
+    <div class="col-sm">
+      <span>hey</span>
+    </div>
+  </div>
+</div>
+{% endfor %} {% endcomment %}
+
+<div class="col-sm-8">
    {% for file in files %}
-         <div class="card" style="width: 20rem;">
+   
+         <div class="card" style="width: 25rem;">
             <img src="{{file.upload.url}}" class="card-img-top" alt="{{file.title}}" />
             <div class="card-body">
             <h5 class="card-title"><a href='{{file.upload.url}}'>{{file.title}}</a></h5>
-            <p class="card-text">{{file.date_time}}</p>
-            <a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn btn-primary">Favorite</a>
-            <a href="{{file.upload.url}}" download="{{file.upload.url}}" class="btn btn-primary">Download</a>
+            <p class="card-text">{{file.date_time}}</p>       
+            <a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn btn-primary"><i class="fas fa-heart">Favorite</i></a>
+        
+            <a href="{{file.upload.url}}" download="{{file.upload.url}}" class="btn btn-primary"><i class="fa fa-download">Download</i></a>
             <form method="post" action="{% url 'delete_file' file.pk %}" style="display: inline;">
                {% csrf_token %}
-               <button type="submit" class="btn btn-danger">Delete</button></a>
+               <button type="submit" class="btn btn-danger"><i class="fas fa-trash">Delete</i></button></a>
             </form>
+            
           </div>
+           
    {% endfor %}
+
+   
+
+   </div>
+</div>
+
 
 {% endblock %}
   
