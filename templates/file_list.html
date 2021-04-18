@@ -2,35 +2,42 @@
 
 {% block content %}
 <div class="container" style="margin-left: 10px;">
+   <i class="bi bi-box-seam"></i>
    <h1>Hello, {{ user.username }}!</h1>
 </div>
+
 <div class="container" style="width:50%; margin:auto; margin-left: 33%;">
    <h1>{{ heading|default:"Droppi, Take Your Files With You." }}</h1>
    {% if not files %}
    <a class="nav-link" href="/upload/">Upload Files Here</a>
    {% endif %}
 </div>
-<div class="container" style="width:50%; margin:auto; margin-left: 33%;">
+
+<div class="container" style=" margin-left: 25%; margin-right: 0;">
+   {% for file in recent %}
+      <div class="row">
+         <div class="col-sm-3">
+            <div class="card" style="width: 200px;">
+               <img src="{{file.upload.url}}" class="card-img-top" alt="{{file.title}}" />
+               <div class="card-body">
+               <h5 class="card-title"><a href='{{file.upload.url}}'>{{file.title}}</a></h5>
+               <p class="card-text">{{file.date_time}}</p>
+               <p><a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn btn-primary btn-sm">Favorite</a></p>
+               <span><a href="{{file.upload.url}}" download="{{file.upload.url}}" class="btn btn-success btn-sm">Download</a></span>
+               <span>
+                  <form method="post" action="{% url 'delete_file' file.pk %}" style="display: inline;">
+                        {% csrf_token %}
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button></a>
+                  </form>
+               </span>
+            </div>
+         </div>
+      </div>
+   {% endfor %}
+</div>
+
 
       {% for file in files %}
-      <!-- <div class="row">
-      <div class="col-sm"> -->
-         <!-- <span> -->
-         <!-- <div class="card" style="width: 20rem;">
-            <img src="{{file.upload.url}}" class="card-img-top" alt="{{file.title}}" />
-            <div class="card-body">
-            <h5 class="card-title"><a href='{{file.upload.url}}'>{{file.title}}</a></h5>
-            <p class="card-text">{{file.date_time}}</p>
-            <a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn btn-primary btn-sm">Favorite</a>
-            <a href="{{file.upload.url}}" download="{{file.upload.url}}" class="btn btn-primary btn-sm">Download</a>
-            <form method="post" action="{% url 'delete_file' file.pk %}" style="display: inline;">
-               {% csrf_token %}
-               <button type="submit" class="btn btn-danger btn-sm">Delete</button></a>
-            </form>
-            </span>
-          </div>
-         </div> -->
-
            
          <div class="card" style="width: 50rem;">
             <ul class="list-group list-group-flush">
@@ -55,7 +62,6 @@
           <div class="w-100"></div>
 
       {% endfor %}
-</div>
 
 {% endblock %}
 
