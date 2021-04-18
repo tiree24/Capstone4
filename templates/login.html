@@ -2,32 +2,21 @@
 
 {% block stylesheets %}
   <style>
-    body {
-      background-color: #9bd4bb;
+    .container {
+      position: relative;
+      top: 200px;
+    }
+
+    .form-group {
+      width: 320px;
+      margin: auto;
     }
   </style>
 {% endblock stylesheets %}
 
 {% block content %}
 
-{% comment %} 
-<div>
-<form action="" method="post">
-  {% csrf_token %} 
-  {{ form.as_p }}
-  <input type="submit" value="Submit!" class="btn btn-primary"/>
-</form>
-</div> {% endcomment %}
-
-{% comment %} {% if heading == 'Sign Up below' %}
-  <p>Already a user? <a href='/login/'>Login.</a></p>
-{% endif %}
-
-{% if heading == 'Login below' %}
-  <p>Not a user? <a href='/signup/'>Sign up.</a></p>
-{% endif %} {% endcomment %}
-
-<div class="container mt--8 pb-5" style="position: relative;top: 200px;">
+<div class="container mt--8 pb-5">
       <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8">
         
@@ -42,7 +31,7 @@
 
                   {% csrf_token %}
             
-                  <div class="form-group" style="width: 320px;margin: auto;">
+                  <div class="form-group">
                     <div class="input-group input-group-alternative mb-3">
                       <div class="input-group-prepend">
                         <span class="input-group-text" style="color: black;"><i class="ni ni-email-83" style="width: 80px;"> Email: </i></span>
@@ -52,7 +41,7 @@
                   </div>
                   <span class="text-error">{{ form.email.errors }}</span>
 
-                  <div class="form-group" style="width: 320px;margin: auto;">
+                  <div class="form-group">
                     <div class="input-group input-group-alternative">
                       <div class="input-group-prepend">
                         <span class="input-group-text" style="color: black;"><i class="ni ni-lock-circle-open" style="width: 80px;"> Password: </i></span>
