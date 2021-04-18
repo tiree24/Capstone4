@@ -1,47 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-        <title>{% block title %}Dropbox Clone{% endblock %}</title>
-        
-        <!-- Favicon -->
-        <link href="/static/assets/img/brand/favicon.png" rel="icon" type="image/png">
+    <title>{% block title %}Dropbox Clone{% endblock %}</title>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <!-- Favicon -->
+    <link href="/static/assets/img/brand/favicon.png" rel="icon" type="image/png" />
 
-        <!-- Icons -->
-        <link href="/static/assets/vendor/nucleo/css/nucleo.min.css" rel="stylesheet">
-        <link href="/static/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 
-        <!-- Argon CSS -->
-        <link type="text/css" href="/static/assets/css/argon.min.css" rel="stylesheet">
+    <!-- Icons -->
+    <link href="/static/assets/vendor/nucleo/css/nucleo.min.css" rel="stylesheet" />
+    <link href="/static/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
 
+    <!-- Argon CSS -->
+    <link type="text/css" href="/static/assets/css/argon.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    {% if request.user.is_authenticated %} {% include 'navbar.html' %} {% endif %}
 
-        </head>
-    <body>
-        {% if request.user.is_authenticated %}
-        {% include 'navbar.html' %}
-        {% endif %}
+    <div class="main-content">{% block content %} {% endblock %}</div>
 
-        <div class='main-content'>
-            {% block content %}
-            {% endblock %}
-        </div>
+    <footer>{% include 'footer.html' %}</footer>
 
-        <footer>
-            {% include 'footer.html' %}
-        </footer>
+    <!-- Core -->
+    <script src="/static/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/static/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-
-        
-        <!-- Core -->
-        <script src="/static/assets/vendor/jquery/dist/jquery.min.js"></script>
-        <script src="/static/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
-        <!-- Argon JS -->
-        <script src="/assets/js/argon.min.js"></script>
-    </body>
+    <!-- Argon JS -->
+    <script src="/assets/js/argon.min.js"></script>
+  </body>
 </html>
