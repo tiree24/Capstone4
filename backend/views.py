@@ -48,6 +48,11 @@ def file_list(request, **kwargs):
     files = FileUpload.objects.filter(created_by=request.user).order_by('-date_time')  
     recent = FileUpload.objects.filter(created_by=request.user).order_by('-date_time')[:3]
     fav_files = request.user.favorites.all()
+    print(request.GET if request.GET else "no queries")
+    
+    if request.GET:
+        query = request.GET.get('search')
+        files = FileUpload.objects.filter(search_str__contains=query)
    
   
     return render(request, 'file_list.html', {"files": files, "recent": recent, "path":path, "favorites":fav_files})
