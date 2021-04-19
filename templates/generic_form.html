@@ -3,22 +3,38 @@
 
 {% block content %}
 
-<h1>{{heading}}</h1>
-
-<div>
-<form action="" method="post">
-  {% csrf_token %} 
-  {{ form.as_p }}
-  <input type="submit" value="Submit!" class="btn btn-primary"/>
-</form>
+<div class="container" style="width:50%; margin:auto; margin-left: 33%;">
+  <div class="row">
+    <h1>{{heading}}</h1>
+  </div>
 </div>
 
+<div class="container" style="width:50%; margin:auto; margin-left: 33%;">
+  <div class="form-group">
+    <form action="" method="post">
+      {% csrf_token %} 
+      {{ form.as_p }}
+      <input type="submit" value="Submit!" class="btn btn-primary"/>
+    </form>
+</div>
+</div>
+
+
 {% if heading == 'Sign Up below' %}
+
+<div class="container" style="width:50%; margin:auto; margin-left: 33%;">
+  <div class="row">
   <p>Already a user? <a href='/login/'>Login.</a></p>
+</div>
+</div>
 {% endif %}
 
 {% if heading == 'Login below' %}
+<div class="container" style="width:50%; margin:auto; margin-left: 33%;">
+  <div class="row">
   <p>Not a user? <a href='/signup/'>Sign up.</a></p>
+</div>
+</div>
 {% endif %}
 
 {% endblock %}

@@ -4,13 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <title>{% block title %}Dropbox Clone{% endblock %}</title>
-
-    <!-- Favicon -->
-    <link href="/static/assets/img/brand/favicon.png" rel="icon" type="image/png" />
+        <title>{% block title %}"Dropii, Your Storage In The Cloud."{% endblock %}</title>
+        
+        <!-- Favicon -->
+        <link href="/static/assets/img/brand/favicon.ico" rel="icon" type="image/png">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+        <!-- Icons -->
+        <link href="/static/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet">
+        <link href="/static/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+        <link href="/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet">
 
     <!-- Icons -->
     <link href="/static/assets/vendor/nucleo/css/nucleo.min.css" rel="stylesheet" />
@@ -18,19 +22,29 @@
 
     <!-- Argon CSS -->
     <link type="text/css" href="/static/assets/css/argon.min.css" rel="stylesheet" />
-  </head>
-  <body>
-    {% if request.user.is_authenticated %} {% include 'navbar.html' %} {% endif %}
+        {% block stylesheets %}{% endblock stylesheets %}
 
-    <div class="main-content">{% block content %} {% endblock %}</div>
+        </head>
+    <body>
+        {% include 'navbar.html' %}
+    
+        <div class='main-content'>
+            {% block content %}
+            {% endblock %}
 
-    <footer>{% include 'footer.html' %}</footer>
+        </div>
 
-    <!-- Core -->
-    <script src="/static/assets/vendor/jquery/dist/jquery.min.js"></script>
-    <script src="/static/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            {% comment %} <footer style="text-align: center;">
+                {% include 'footer.html' %}
+            </footer> {% endcomment %}
 
-    <!-- Argon JS -->
-    <script src="/assets/js/argon.min.js"></script>
-  </body>
+
+        
+        <!-- Core -->
+        <script src="/static/assets/vendor/jquery/dist/jquery.min.js"></script>
+        <script src="/static/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Argon JS -->
+        <script src="/static/assets/js/argon.min.js"></script>
+    </body>
 </html>
