@@ -20,7 +20,7 @@
       <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8">
         
-          <div class="card bg-gray shadow border-0">
+          <div class="card bg-secondary shadow border-0">
             <div class="card-body px-lg-5 py-lg-5">
               <div class="text-center text-muted mb-4">
                 <h1>Login</h1>
@@ -32,9 +32,9 @@
                   {% csrf_token %}
             
                   <div class="form-group">
-                    <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group">
                       <div class="input-group-prepend">
-                        <span class="input-group-text" style="color: black;"><i class="ni ni-email-83" style="width: 80px;"> Email: </i></span>
+                        <span class="input-group-text"><i class="ni ni-email-83" style="width: 80px;"> Email: </i></span>
                       </div>
                       {{ form.email }}
                     </div>
@@ -42,9 +42,9 @@
                   <span class="text-error">{{ form.email.errors }}</span>
 
                   <div class="form-group">
-                    <div class="input-group input-group-alternative">
+                    <div class="input-group">
                       <div class="input-group-prepend">
-                        <span class="input-group-text" style="color: black;"><i class="ni ni-lock-circle-open" style="width: 80px;"> Password: </i></span>
+                        <span class="input-group-text"><i class="ni ni-lock-circle-open" style="width: 80px;"> Password: </i></span>
                       </div>
                       {{ form.password }}
                     </div>
