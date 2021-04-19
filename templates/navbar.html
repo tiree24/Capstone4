@@ -1,13 +1,28 @@
 
+  <div class="row" > 
 
-  <nav style="background-color:#5e72e4;" >
-    <h1 style="color:white; font-type:30px;" >Droppi</h1>
-    <ul class="nav justify-content-end" >
-      <a class="nav-link active" style="color:white;" href="/"><i class="fa fa-home">Home</i></a> 
-      <a class="nav-link" style="color:white;" href="/search/"><i class="fa fa-search">Search</i></a>
-      <a class="nav-link" style="color:white;" href="/logout/"><i class="fa fa-sign-out">Logout</i></a>
-    </ul>
+   <div class="col-md-4" style="position:auto; margin: 0;
+  padding: 0;"  >
+      <nav style="background-color:#5e72e4;  opacity: 95%; height: 100%; position:auto; margin: 0;
+  padding: 0;" >
+          <center><h1 style="color:white;">{{ heading|default:"Dropbox Clone" }}</h1></center>
+        <center>
+        <h3 style="padding:40px; color:white;">Hello, {{ user.username }}.</h3>
+   
+      <p><a class="nav-link active" style="color:white;" href="/"><i class="fa fa-home">Home</i></a></p>
+      <p><a class="nav-link" style="color:white;" href="/search/"><i class="fa fa-search">Search</i></a></p>
+      <p><a class="nav-link" style="color:white;" href="/logout/"><i class="fa fa-sign-out">Logout</i></a></p>
+      <p><a class="nav-link" style="color:white;" href="/upload/"><i class="fa fa-upload">Upload</i></a></p>
+      <p><a class='nav-link' style="color:white;" href='/favorites/'><i class="fa fa-heart">Favorites</i></a></p>
+
   </nav>
+        </center>
+
+
+</div>
+
+
+ 
 
 
 

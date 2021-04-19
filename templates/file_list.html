@@ -3,25 +3,15 @@
 {% block content %}
 
 
-<div class="container">
-  <div class="row" style="padding:40px; padding-left:-300px;">   
-   <div class="col-md-4">
-      <div>
-        {% comment %} <center><h1>{{ heading|default:"Dropbox Clone" }}</h1></center> {% endcomment %}
-        <center>
-        <h3 style="padding:40px;">Hello, {{ user.username }}.</h3>
-        <a class="nav-link" href="/upload/"><p><i class="fas fa-upload">Upload</i></p></a>
-        <a class='nav-link' href='/favorites/'><p><i class="fas fa-heart">Favorites</i></p></a>
-        </center>
-  </div>
-</div>
 
 
-<div class="col-sm-8" >
+
+<div class="col-md-8" style="display: block;
+  width: 60px;" >
 
  <center><h1>Recents</h1></center>
  
-<div class="recent" style=" width: 25rem;">
+<center><div class="recent" style=" width: 25rem;">
 <div class="row">
 {% for file in recent %}
 <div class="col-md-4">
@@ -81,12 +71,22 @@
                   src="{{file.upload.url}}"/></span>
                <span><a href='{{file.upload.url}}'>{{file.title}}</a></span>
                <span>{{file.date_time}}</span>
-               <span><a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn btn-primary btn-sm">Favorite</a></span>
-               <span><a href="{{file.upload.url}}" download="{{file.upload.url}}" class="btn btn-success btn-sm">Download</a></span>
+               {% comment %} {% for fav in favorites %} {% endcomment %}
+               {% if file in favorites  %}
+               fav
+               <a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn btn-primary btn-sm"><i class="fa fa-heart">Favorite</i></a>
+               
+                {% else %}
+              <a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn btn-primary btn-sm"><i class="fa fa-heart" style="background-color:red;">Favorite</i></a>
+                {% comment %} <a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn btn-primary btn-sm"><i class="fas fa-heart">Favorite</i></a> {% endcomment %}
+
+              {% endif %}
+               {% comment %} {%endfor%} {% endcomment %}
+               <span><a href="{{file.upload.url}}" download="{{file.upload.url}}" class="btn btn-success btn-sm"><i class="fa fa-download">Download</i></a></span>
                <span>
                   <form method="post" action="{% url 'delete_file' file.pk %}" style="display: inline;">
                       {% csrf_token %}
-                  <button type="submit" class="btn btn-danger btn-sm">Delete</button></a>
+                  <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash">Delete</i></button></a>
                   </form>
                </span>
             </li>
