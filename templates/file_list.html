@@ -4,8 +4,8 @@
 
 
 <div class="container">
-  <div class="row" style="padding:40px; ">   
-   <div class="col-md-4" style="background:gray">
+  <div class="row" style="padding:40px; padding-left:-300px;">   
+   <div class="col-md-4">
       <div>
         {% comment %} <center><h1>{{ heading|default:"Dropbox Clone" }}</h1></center> {% endcomment %}
         <center>
@@ -14,7 +14,7 @@
         <a class='nav-link' href='/favorites/'><p><i class="fas fa-heart">Favorites</i></p></a>
         </center>
   </div>
-  </div>
+</div>
 
 
 <div class="col-sm-8" >
@@ -40,38 +40,9 @@
           </div>
 {% endfor %}
 </div>
- <div class="card" style="width: 50rem;">
-         {% for file in files %}
-            
-            <ul class="list-group list-group-flush">
-            <div>
-            <li class="list-group-item">
-                <img style="width: 25px; height: 25px;"
-                  alt="{{file.title}}"
-                  src="{{file.upload.url}}"/>
-               <a href='{{file.upload.url}}'>{{file.title}}</a>
-               {{file.date_time}}
-               <a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn btn-primary btn-sm">Favorite</a>
-               <a href="{{file.upload.url}}" download="{{file.upload.url}}" class="btn btn-success btn-sm">Download</a>
-               
-                  <form method="post" action="{% url 'delete_file' file.pk %}" style="display: inline;">
-                      {% csrf_token %}
-                  <button type="submit" class="btn btn-danger btn-sm">Delete</button></a>
-                  </form>
-                  </div>
-               
-            </li>
-            </ul>
-            </div>
-               </div>
-           
-   {% endfor %}
-   </div>
-               </div>
-
-
 </div>
-{% endblock %}
+
+   {% for file in files %}
 
    {% comment %} ## if.for.fav
           {% for fav in favorites%}
@@ -101,9 +72,37 @@
             </form>
             
           </div> {% endcomment %}
-    {% comment %} <div class="card" style="width: 25rem;"> {% endcomment %}
+             
+         <div class="card" style="width: 50rem;">
+            <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+               <span><img style="width: 25px; height: 25px;"
+                  alt="{{file.title}}"
+                  src="{{file.upload.url}}"/></span>
+               <span><a href='{{file.upload.url}}'>{{file.title}}</a></span>
+               <span>{{file.date_time}}</span>
+               <span><a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn btn-primary btn-sm">Favorite</a></span>
+               <span><a href="{{file.upload.url}}" download="{{file.upload.url}}" class="btn btn-success btn-sm">Download</a></span>
+               <span>
+                  <form method="post" action="{% url 'delete_file' file.pk %}" style="display: inline;">
+                      {% csrf_token %}
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button></a>
+                  </form>
+               </span>
+            </li>
+            </ul>
+            </div>
+           
+   {% endfor %}
+
+
    
-        
+
+   </div>
+</div>
+
+
+{% endblock %}
   
 <!-- <div class="card" style="width: 18rem;">
    <ul class="list-group list-group-flush">
