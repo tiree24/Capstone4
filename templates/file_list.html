@@ -40,14 +40,7 @@
             <div class="card-body">
             <center><h3 class="card-title"><a href='{{file.upload.url}}'>{{file.title}}</a></h3>
             <p class="card-text" style="font-size:12px;">{{file.date_time}}</p> </center>      
-            {% comment %} <a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn btn-primary"><i class="fas fa-heart">Favorite</i></a> {% endcomment %}
-        
-            {% comment %} <a href="{{file.upload.url}}" download="{{file.upload.url}}" class="btn btn-primary"><i class="fa fa-download">Download</i></a> {% endcomment %}
-            {% comment %} <form method="post" action="{% url 'delete_file' file.pk %}" style="display: inline;">
-               {% csrf_token %}
-               <button type="submit" class="btn btn-danger"><i class="fas fa-trash">Delete</i></button></a>
-            </form> {% endcomment %}
-            
+  
           </div>
           </div>
 {% endfor %}
@@ -55,36 +48,7 @@
 </div>
 
    {% for file in files %}
-
-   {% comment %} ## if.for.fav
-          {% for fav in favorites%}
-              {% if file != fav %}
-                 
-                <a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn btn-primary"><i class="fas fa-heart">Favorite</i></a>
-              
-                {% else  %}
-                favorite
-                
-          
-              {% endif%}
-                 {% endfor %} {% endcomment %}
-                 
-            {% comment %} <img src="{{file.upload.url}}" class="card-img-top" alt="{{file.title}}" />
-            <div class="card-body">
-            <h5 class="card-title"><a href='{{file.upload.url}}'>{{file.title}}</a></h5>
-            <p class="card-text">{{file.date_time}}</p> {% endcomment %}
-             
-            
-            {% comment %} {% endfor %} {% endcomment %}
-          
-            {% comment %} <a href="{{file.upload.url}}" download="{{file.upload.url}}" class="btn btn-primary"><i class="fa fa-download">Download</i></a>
-            <form method="post" action="{% url 'delete_file' file.pk %}" style="display: inline;">
-               {% csrf_token %}
-               <button type="submit" class="btn btn-danger"><i class="fas fa-trash">Delete</i></button></a>
-            </form>
-            
-          </div> {% endcomment %}
-             
+     
          <div class="card" style="width: 50rem;">
             <ul class="list-group list-group-flush">
             <li class="list-group-item">
@@ -93,17 +57,14 @@
                   src="{{file.upload.url}}"/></span>
                <span><a href='{{file.upload.url}}'>{{file.title}}</a></span>
                <span>{{file.date_time}}</span>
-               {% comment %} {% for fav in favorites %} {% endcomment %}
                {% if file in favorites  %}
                
                <a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn" ><i class="fa fa-heart" style="color:red;"></i></a>
                
                 {% else %}
               <a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn" ><i class="fa fa-heart"></i></a>
-                {% comment %} <a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn btn-primary btn-sm"><i class="fas fa-heart">Favorite</i></a> {% endcomment %}
 
               {% endif %}
-               {% comment %} {%endfor%} {% endcomment %}
                <a href="{{file.upload.url}}" download="{{file.upload.url}}" class="btn" ><i class="fa fa-download"></i></a>
             
                   <form method="post" action="{% url 'delete_file' file.pk %}" style="display: inline;">
@@ -116,9 +77,6 @@
             </div>
            
    {% endfor %}
-
-
-   
 
    </div>
 </div>
