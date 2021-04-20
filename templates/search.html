@@ -2,14 +2,14 @@
 
 {% block content %}
 
-<div class="container" style="width:50%; margin:auto; margin-left: 33%;">
-  <h1>{{ heading|default:"Search" }}</h1>
-  <form type="get" action=" ">
-    <input id="search_box" type="text" name="search" placeholder="Search..." />
-    <button id="search_submit" class="btn btn-primary btn-sm" type="submit">Submit</button>
-  </form>
-</div>
-<p></p>
+  <div class="container" style="width:50%; margin:auto; margin-left: 33%;">
+    <h1>{{ heading|default:"Search" }}</h1>
+    <form type="get" action=" ">
+      <input id="search_box" type="text" name="search" placeholder="Search..." />
+      <button id="search_submit" class="btn btn-primary btn-sm" type="submit">Submit</button>
+    </form>
+  </div>
+  <p></p>
 
 <div class="container" style="width:50%; margin:auto; margin-left: 33%;">
 {% if all_search_results %} {% for file in all_search_results %}
@@ -29,9 +29,9 @@
   {% endfor%} {% else %}
 </div>
 
-  <div class="container" style="width:50%; margin:auto; margin-left: 33%;">
-    <h3>Try Again</h3>
-  </div>
+    <div class="container" style="width:50%; margin:auto; margin-left: 33%;">
+      <h3>Try Again</h3>
+    </div>
 {% endif %}
 
 {% endblock content %}
