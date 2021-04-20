@@ -16,7 +16,7 @@ class LoginFormView(View):
         if request.user.is_authenticated:
             return HttpResponseRedirect(reverse('file_list'))
         else:
-            return render(request, "login.html", { 'form': form, 'heading': 'Login below'})
+            return render(request, "login.html", { 'form': form, 'heading': 'Droppi'})
 
     def post(self, request):
         print('posted!!')
@@ -63,5 +63,5 @@ def signup(request):
             return HttpResponseRedirect(reverse('signup'))
 
     form = CustomUserForm()
-    return render(request, 'signup.html', {'form': form, 'heading': "Sign Up below"})
+    return render(request, 'signup.html', {'form': form, 'heading': "Droppi"})
 
