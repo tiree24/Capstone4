@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title>{% block title %}"Dropii, Your Storage In The Cloud."{% endblock %}</title>
+        <title>{% block title %}"Dropii"{% endblock %}</title>
         
         <!-- Favicon -->
         <link href="/static/assets/img/brand/favicon.ico" rel="icon" type="image/png">
@@ -24,10 +24,8 @@
         {% block stylesheets %}{% endblock stylesheets %}
 
         </head>
-    <body style="background-color: lightgrey;">
-        {% if request.user.is_authenticated %}
-                {% include 'navbar.html' %}
-        {% endif %}
+        <body>     
+        {% include 'navbar.html' %}
         <div class='main-content'>
             {% block content %}
             {% endblock %}

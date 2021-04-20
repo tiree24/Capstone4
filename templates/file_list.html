@@ -96,10 +96,10 @@
                {% comment %} {% for fav in favorites %} {% endcomment %}
                {% if file in favorites  %}
                
-               <a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn" ><i class="fa fa-heart" ></i></a>
+               <a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn" ><i class="fa fa-heart" style="color:red;"></i></a>
                
                 {% else %}
-              <a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn" ><i class="fa fa-heart" style="color:red;"></i></a>
+              <a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn" ><i class="fa fa-heart"></i></a>
                 {% comment %} <a href="http://127.0.0.1:8000/favorite/{{ file.id }}" class="btn btn-primary btn-sm"><i class="fas fa-heart">Favorite</i></a> {% endcomment %}
 
               {% endif %}
