@@ -2,11 +2,11 @@
 
 {% block content %}
 
-<div class="container" style="width:50%; margin:auto; margin-left: 33%;">
+<div class="container" style="margin:auto;text-align: center;margin-bottom: 100px;width: 800px;">
     <h1>{{ heading|default:"View Your Favorites" }}</h1>
 </div>
 
-<div class="container" style="width:50%; margin:auto; margin-left: 33%;">
+<div class="container" style="margin:auto;">
         {% for favorite in favorites %}
         <div class="row">
         <div class="col-sm">
@@ -15,7 +15,7 @@
                 <div class="card-body">
                 <h5 class="card-title"><a href='{{favorite.upload.url}}'>{{favorite.title}}</a></h5>
                 <p class="card-text">{{favorite.date_time}}</p>
-                <p><a href="http://127.0.0.1:8000/favorite/{{ favorite.id }}" class="btn btn-primary btn-sm">Favorite</a></p>
+                <p><a href="http://127.0.0.1:8000/favorite/{{ favorite.id }}" class="btn btn-primary btn-sm">Unfavorite</a></p>
                 </li>
             </div>
         </div>
