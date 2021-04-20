@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" style="height: 100%;">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,17 +24,14 @@
         {% block stylesheets %}{% endblock stylesheets %}
 
         </head>
-        <body>     
-            {% include 'navbar.html' %}
+    <body style="height: 100%;background-color: lightgrey;">
+        {% include 'navbar.html' %}
+    
         <div class='main-content'>
             {% block content %}
             {% endblock %}
 
         </div>
-
-            <!-- <footer style="text-align: center;">
-                {% include 'footer.html' %}
-            </footer>  -->
 
 
         

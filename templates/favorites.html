@@ -2,11 +2,11 @@
 
 {% block content %}
 
-<div class="container" style="width:50%; margin:auto; margin-left: 33%;">
+<div class="container" style="margin:auto;text-align: center;margin-bottom: 100px;width: 800px;">
     <h1>{{ heading|default:"View Your Favorites" }}</h1>
 </div>
 
-<div class="container" style="width:50%; margin:auto; margin-left: 33%;">
+<div class="container" style="margin:auto;">
         {% for favorite in favorites %}
         <div class="row">
         <div class="col-sm">
