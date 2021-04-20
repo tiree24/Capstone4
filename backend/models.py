@@ -9,9 +9,6 @@ class FileUpload(models.Model):
     search_str = models.TextField(max_length=50)
     created_by = models.ManyToManyField(MyCustomUser, related_name="created_by")
 
-    # def __str__(self):
-    #     return self.search_str
     def __str__(self):
         return self.title
-    # def __str__(self):
-    #     return self.upload.name
+

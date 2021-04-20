@@ -65,8 +65,8 @@ def delete_file(request, pk):
         files.delete()
         full_path = os.path.join(settings.MEDIA_ROOT, files.upload.path)
         os.unlink(full_path)
-        return redirect('/files/')
-    return redirect('/files')
+        return redirect('file_list')
+    return redirect('file_list')
 # deleting instance from db WORKS!!
 # delete file from sys WORKS!!
 
@@ -88,7 +88,7 @@ def favorite(request, upload_id):
 
 @login_required()
 def favorites(request):
-    fav_files = request.user.favorites.all()
+    fav_files = request.user.favorites.all().order_by('-date_time') 
     return render(request, 'favorites.html', {
         'favorites': fav_files
     })
@@ -99,9 +99,11 @@ class SearchView(ListView):
     template_name = 'search.html'
     context_object_name = 'all_search_results'
 
+
     def get_queryset(self):
        results = super(SearchView, self).get_queryset()
        query = self.request.GET.get('search')
+       
        if query:
           postresult = FileUpload.objects.filter(search_str__contains=query)
           results = postresult
