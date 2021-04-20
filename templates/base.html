@@ -4,10 +4,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title>{% block title %}Dropbox Clone{% endblock %}</title>
+        <title>{% block title %}"Dropii, Your Storage In The Cloud."{% endblock %}</title>
         
         <!-- Favicon -->
-        <link href="/static/assets/img/brand/favicon.png" rel="icon" type="image/png">
+        <link href="/static/assets/img/brand/favicon.ico" rel="icon" type="image/png">
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
@@ -21,22 +21,21 @@
         <!-- Argon CSS -->
         <link type="text/css" href="/static/assets/css/argon.min.css" rel="stylesheet">
 
+        {% block stylesheets %}{% endblock stylesheets %}
 
         </head>
-    <body>
-        <div class="container" style="padding:0px; margin:0px; font-family: Oswald;">
-        {% if request.user.is_authenticated %}
+    <body style="background-color: lightgrey;">
         {% include 'navbar.html' %}
-        {% endif %}
 
         <div class='main-content'>
             {% block content %}
             {% endblock %}
+
         </div>
-        </div
-        <footer>
-            {% include 'footer.html' %}
-        </footer>
+
+            {% comment %} <footer style="text-align: center;">
+                {% include 'footer.html' %}
+            </footer> {% endcomment %}
 
 
         
@@ -45,6 +44,6 @@
         <script src="/static/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
         <!-- Argon JS -->
-        <script src="/assets/js/argon.min.js"></script>
+        <script src="/static/assets/js/argon.min.js"></script>
     </body>
 </html>
